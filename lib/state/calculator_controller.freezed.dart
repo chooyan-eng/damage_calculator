@@ -32,7 +32,11 @@ class _$CalculatorStateTearOff {
       List<DamageScaleFactor> atkScaleFactorList = const [],
       List<DamageScaleFactor> defScaleFactorList = const [],
       DamageScaleFactor atkRank,
-      DamageScaleFactor defRank}) {
+      DamageScaleFactor defRank,
+      int hpBase = 100,
+      int hpIndividual = 31,
+      int hpEffort = 0,
+      int hpActual = 0}) {
     return _CalculatorState(
       showingDetail: showingDetail,
       atkBase: atkBase,
@@ -52,6 +56,10 @@ class _$CalculatorStateTearOff {
       defScaleFactorList: defScaleFactorList,
       atkRank: atkRank,
       defRank: defRank,
+      hpBase: hpBase,
+      hpIndividual: hpIndividual,
+      hpEffort: hpEffort,
+      hpActual: hpActual,
     );
   }
 }
@@ -80,6 +88,10 @@ mixin _$CalculatorState {
   List<DamageScaleFactor> get defScaleFactorList;
   DamageScaleFactor get atkRank;
   DamageScaleFactor get defRank;
+  int get hpBase;
+  int get hpIndividual;
+  int get hpEffort;
+  int get hpActual;
 
   @JsonKey(ignore: true)
   $CalculatorStateCopyWith<CalculatorState> get copyWith;
@@ -108,7 +120,11 @@ abstract class $CalculatorStateCopyWith<$Res> {
       List<DamageScaleFactor> atkScaleFactorList,
       List<DamageScaleFactor> defScaleFactorList,
       DamageScaleFactor atkRank,
-      DamageScaleFactor defRank});
+      DamageScaleFactor defRank,
+      int hpBase,
+      int hpIndividual,
+      int hpEffort,
+      int hpActual});
 
   $DamageScaleFactorCopyWith<$Res> get atkRank;
   $DamageScaleFactorCopyWith<$Res> get defRank;
@@ -143,6 +159,10 @@ class _$CalculatorStateCopyWithImpl<$Res>
     Object defScaleFactorList = freezed,
     Object atkRank = freezed,
     Object defRank = freezed,
+    Object hpBase = freezed,
+    Object hpIndividual = freezed,
+    Object hpEffort = freezed,
+    Object hpActual = freezed,
   }) {
     return _then(_value.copyWith(
       showingDetail: showingDetail == freezed
@@ -175,6 +195,11 @@ class _$CalculatorStateCopyWithImpl<$Res>
           atkRank == freezed ? _value.atkRank : atkRank as DamageScaleFactor,
       defRank:
           defRank == freezed ? _value.defRank : defRank as DamageScaleFactor,
+      hpBase: hpBase == freezed ? _value.hpBase : hpBase as int,
+      hpIndividual:
+          hpIndividual == freezed ? _value.hpIndividual : hpIndividual as int,
+      hpEffort: hpEffort == freezed ? _value.hpEffort : hpEffort as int,
+      hpActual: hpActual == freezed ? _value.hpActual : hpActual as int,
     ));
   }
 
@@ -224,7 +249,11 @@ abstract class _$CalculatorStateCopyWith<$Res>
       List<DamageScaleFactor> atkScaleFactorList,
       List<DamageScaleFactor> defScaleFactorList,
       DamageScaleFactor atkRank,
-      DamageScaleFactor defRank});
+      DamageScaleFactor defRank,
+      int hpBase,
+      int hpIndividual,
+      int hpEffort,
+      int hpActual});
 
   @override
   $DamageScaleFactorCopyWith<$Res> get atkRank;
@@ -263,6 +292,10 @@ class __$CalculatorStateCopyWithImpl<$Res>
     Object defScaleFactorList = freezed,
     Object atkRank = freezed,
     Object defRank = freezed,
+    Object hpBase = freezed,
+    Object hpIndividual = freezed,
+    Object hpEffort = freezed,
+    Object hpActual = freezed,
   }) {
     return _then(_CalculatorState(
       showingDetail: showingDetail == freezed
@@ -295,6 +328,11 @@ class __$CalculatorStateCopyWithImpl<$Res>
           atkRank == freezed ? _value.atkRank : atkRank as DamageScaleFactor,
       defRank:
           defRank == freezed ? _value.defRank : defRank as DamageScaleFactor,
+      hpBase: hpBase == freezed ? _value.hpBase : hpBase as int,
+      hpIndividual:
+          hpIndividual == freezed ? _value.hpIndividual : hpIndividual as int,
+      hpEffort: hpEffort == freezed ? _value.hpEffort : hpEffort as int,
+      hpActual: hpActual == freezed ? _value.hpActual : hpActual as int,
     ));
   }
 }
@@ -319,7 +357,11 @@ class _$_CalculatorState extends _CalculatorState with DiagnosticableTreeMixin {
       this.atkScaleFactorList = const [],
       this.defScaleFactorList = const [],
       this.atkRank,
-      this.defRank})
+      this.defRank,
+      this.hpBase = 100,
+      this.hpIndividual = 31,
+      this.hpEffort = 0,
+      this.hpActual = 0})
       : assert(showingDetail != null),
         assert(atkBase != null),
         assert(atkIndividual != null),
@@ -336,6 +378,10 @@ class _$_CalculatorState extends _CalculatorState with DiagnosticableTreeMixin {
         assert(minDamage != null),
         assert(atkScaleFactorList != null),
         assert(defScaleFactorList != null),
+        assert(hpBase != null),
+        assert(hpIndividual != null),
+        assert(hpEffort != null),
+        assert(hpActual != null),
         super._();
 
   @JsonKey(defaultValue: true)
@@ -390,10 +436,22 @@ class _$_CalculatorState extends _CalculatorState with DiagnosticableTreeMixin {
   final DamageScaleFactor atkRank;
   @override
   final DamageScaleFactor defRank;
+  @JsonKey(defaultValue: 100)
+  @override
+  final int hpBase;
+  @JsonKey(defaultValue: 31)
+  @override
+  final int hpIndividual;
+  @JsonKey(defaultValue: 0)
+  @override
+  final int hpEffort;
+  @JsonKey(defaultValue: 0)
+  @override
+  final int hpActual;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'CalculatorState(showingDetail: $showingDetail, atkBase: $atkBase, atkIndividual: $atkIndividual, atkEffort: $atkEffort, atkNature: $atkNature, atkActual: $atkActual, defBase: $defBase, defIndividual: $defIndividual, defEffort: $defEffort, defNature: $defNature, defActual: $defActual, power: $power, maxDamage: $maxDamage, minDamage: $minDamage, atkScaleFactorList: $atkScaleFactorList, defScaleFactorList: $defScaleFactorList, atkRank: $atkRank, defRank: $defRank)';
+    return 'CalculatorState(showingDetail: $showingDetail, atkBase: $atkBase, atkIndividual: $atkIndividual, atkEffort: $atkEffort, atkNature: $atkNature, atkActual: $atkActual, defBase: $defBase, defIndividual: $defIndividual, defEffort: $defEffort, defNature: $defNature, defActual: $defActual, power: $power, maxDamage: $maxDamage, minDamage: $minDamage, atkScaleFactorList: $atkScaleFactorList, defScaleFactorList: $defScaleFactorList, atkRank: $atkRank, defRank: $defRank, hpBase: $hpBase, hpIndividual: $hpIndividual, hpEffort: $hpEffort, hpActual: $hpActual)';
   }
 
   @override
@@ -418,7 +476,11 @@ class _$_CalculatorState extends _CalculatorState with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('atkScaleFactorList', atkScaleFactorList))
       ..add(DiagnosticsProperty('defScaleFactorList', defScaleFactorList))
       ..add(DiagnosticsProperty('atkRank', atkRank))
-      ..add(DiagnosticsProperty('defRank', defRank));
+      ..add(DiagnosticsProperty('defRank', defRank))
+      ..add(DiagnosticsProperty('hpBase', hpBase))
+      ..add(DiagnosticsProperty('hpIndividual', hpIndividual))
+      ..add(DiagnosticsProperty('hpEffort', hpEffort))
+      ..add(DiagnosticsProperty('hpActual', hpActual));
   }
 
   @override
@@ -476,7 +538,19 @@ class _$_CalculatorState extends _CalculatorState with DiagnosticableTreeMixin {
                 const DeepCollectionEquality()
                     .equals(other.atkRank, atkRank)) &&
             (identical(other.defRank, defRank) ||
-                const DeepCollectionEquality().equals(other.defRank, defRank)));
+                const DeepCollectionEquality()
+                    .equals(other.defRank, defRank)) &&
+            (identical(other.hpBase, hpBase) ||
+                const DeepCollectionEquality().equals(other.hpBase, hpBase)) &&
+            (identical(other.hpIndividual, hpIndividual) ||
+                const DeepCollectionEquality()
+                    .equals(other.hpIndividual, hpIndividual)) &&
+            (identical(other.hpEffort, hpEffort) ||
+                const DeepCollectionEquality()
+                    .equals(other.hpEffort, hpEffort)) &&
+            (identical(other.hpActual, hpActual) ||
+                const DeepCollectionEquality()
+                    .equals(other.hpActual, hpActual)));
   }
 
   @override
@@ -499,7 +573,11 @@ class _$_CalculatorState extends _CalculatorState with DiagnosticableTreeMixin {
       const DeepCollectionEquality().hash(atkScaleFactorList) ^
       const DeepCollectionEquality().hash(defScaleFactorList) ^
       const DeepCollectionEquality().hash(atkRank) ^
-      const DeepCollectionEquality().hash(defRank);
+      const DeepCollectionEquality().hash(defRank) ^
+      const DeepCollectionEquality().hash(hpBase) ^
+      const DeepCollectionEquality().hash(hpIndividual) ^
+      const DeepCollectionEquality().hash(hpEffort) ^
+      const DeepCollectionEquality().hash(hpActual);
 
   @JsonKey(ignore: true)
   @override
@@ -527,7 +605,11 @@ abstract class _CalculatorState extends CalculatorState {
       List<DamageScaleFactor> atkScaleFactorList,
       List<DamageScaleFactor> defScaleFactorList,
       DamageScaleFactor atkRank,
-      DamageScaleFactor defRank}) = _$_CalculatorState;
+      DamageScaleFactor defRank,
+      int hpBase,
+      int hpIndividual,
+      int hpEffort,
+      int hpActual}) = _$_CalculatorState;
 
   @override
   bool get showingDetail;
@@ -565,6 +647,14 @@ abstract class _CalculatorState extends CalculatorState {
   DamageScaleFactor get atkRank;
   @override
   DamageScaleFactor get defRank;
+  @override
+  int get hpBase;
+  @override
+  int get hpIndividual;
+  @override
+  int get hpEffort;
+  @override
+  int get hpActual;
   @override
   @JsonKey(ignore: true)
   _$CalculatorStateCopyWith<_CalculatorState> get copyWith;

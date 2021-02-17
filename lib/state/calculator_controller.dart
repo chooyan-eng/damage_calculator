@@ -30,6 +30,10 @@ abstract class CalculatorState with _$CalculatorState {
     @Default([]) List<DamageScaleFactor> defScaleFactorList,
     DamageScaleFactor atkRank,
     DamageScaleFactor defRank,
+    @Default(100) int hpBase,
+    @Default(31) int hpIndividual,
+    @Default(0) int hpEffort,
+    @Default(0) int hpActual,
   }) = _CalculatorState;
 
   double get totalAtkScaleFactor => atkScaleFactorList
@@ -102,6 +106,7 @@ class CalculatorController extends StateNotifier<CalculatorState> {
     );
 
     updateStatus();
+    updateHp();
   }
 
   void toggleShowingDetail() {
@@ -214,6 +219,26 @@ class CalculatorController extends StateNotifier<CalculatorState> {
       power: power ?? state.power,
       minDamage: damages[0],
       maxDamage: damages[1],
+    );
+  }
+
+  void updateHp({
+    int hpBase,
+    int hpIndividual,
+    int hpEffort,
+  }) {
+    state = state.copyWith(
+      hpBase: hpBase ?? state.hpBase,
+      hpIndividual: hpIndividual ?? state.hpIndividual,
+      hpEffort: hpEffort ?? state.hpEffort,
+    );
+
+    state = state.copyWith(
+      hpActual: Calculator.toActualHp(
+        state.hpBase,
+        individual: state.hpIndividual,
+        effort: state.hpEffort,
+      ),
     );
   }
 }
