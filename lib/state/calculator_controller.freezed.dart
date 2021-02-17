@@ -16,19 +16,23 @@ class _$CalculatorStateTearOff {
 // ignore: unused_element
   _CalculatorState call(
       {bool showingDetail = true,
-      int atkBase = 0,
+      int atkBase = 100,
       int atkIndividual = 31,
       int atkEffort = 0,
       double atkNature = 1.0,
       int atkActual = 0,
-      int defBase = 0,
+      int defBase = 100,
       int defIndividual = 31,
       int defEffort = 0,
       double defNature = 1.0,
       int defActual = 0,
       int power = 100,
       int maxDamage = 0,
-      int minDamage = 0}) {
+      int minDamage = 0,
+      List<DamageScaleFactor> atkScaleFactorList = const [],
+      List<DamageScaleFactor> defScaleFactorList = const [],
+      DamageScaleFactor atkRank,
+      DamageScaleFactor defRank}) {
     return _CalculatorState(
       showingDetail: showingDetail,
       atkBase: atkBase,
@@ -44,6 +48,10 @@ class _$CalculatorStateTearOff {
       power: power,
       maxDamage: maxDamage,
       minDamage: minDamage,
+      atkScaleFactorList: atkScaleFactorList,
+      defScaleFactorList: defScaleFactorList,
+      atkRank: atkRank,
+      defRank: defRank,
     );
   }
 }
@@ -68,6 +76,10 @@ mixin _$CalculatorState {
   int get power;
   int get maxDamage;
   int get minDamage;
+  List<DamageScaleFactor> get atkScaleFactorList;
+  List<DamageScaleFactor> get defScaleFactorList;
+  DamageScaleFactor get atkRank;
+  DamageScaleFactor get defRank;
 
   @JsonKey(ignore: true)
   $CalculatorStateCopyWith<CalculatorState> get copyWith;
@@ -92,7 +104,14 @@ abstract class $CalculatorStateCopyWith<$Res> {
       int defActual,
       int power,
       int maxDamage,
-      int minDamage});
+      int minDamage,
+      List<DamageScaleFactor> atkScaleFactorList,
+      List<DamageScaleFactor> defScaleFactorList,
+      DamageScaleFactor atkRank,
+      DamageScaleFactor defRank});
+
+  $DamageScaleFactorCopyWith<$Res> get atkRank;
+  $DamageScaleFactorCopyWith<$Res> get defRank;
 }
 
 /// @nodoc
@@ -120,6 +139,10 @@ class _$CalculatorStateCopyWithImpl<$Res>
     Object power = freezed,
     Object maxDamage = freezed,
     Object minDamage = freezed,
+    Object atkScaleFactorList = freezed,
+    Object defScaleFactorList = freezed,
+    Object atkRank = freezed,
+    Object defRank = freezed,
   }) {
     return _then(_value.copyWith(
       showingDetail: showingDetail == freezed
@@ -142,7 +165,37 @@ class _$CalculatorStateCopyWithImpl<$Res>
       power: power == freezed ? _value.power : power as int,
       maxDamage: maxDamage == freezed ? _value.maxDamage : maxDamage as int,
       minDamage: minDamage == freezed ? _value.minDamage : minDamage as int,
+      atkScaleFactorList: atkScaleFactorList == freezed
+          ? _value.atkScaleFactorList
+          : atkScaleFactorList as List<DamageScaleFactor>,
+      defScaleFactorList: defScaleFactorList == freezed
+          ? _value.defScaleFactorList
+          : defScaleFactorList as List<DamageScaleFactor>,
+      atkRank:
+          atkRank == freezed ? _value.atkRank : atkRank as DamageScaleFactor,
+      defRank:
+          defRank == freezed ? _value.defRank : defRank as DamageScaleFactor,
     ));
+  }
+
+  @override
+  $DamageScaleFactorCopyWith<$Res> get atkRank {
+    if (_value.atkRank == null) {
+      return null;
+    }
+    return $DamageScaleFactorCopyWith<$Res>(_value.atkRank, (value) {
+      return _then(_value.copyWith(atkRank: value));
+    });
+  }
+
+  @override
+  $DamageScaleFactorCopyWith<$Res> get defRank {
+    if (_value.defRank == null) {
+      return null;
+    }
+    return $DamageScaleFactorCopyWith<$Res>(_value.defRank, (value) {
+      return _then(_value.copyWith(defRank: value));
+    });
   }
 }
 
@@ -167,7 +220,16 @@ abstract class _$CalculatorStateCopyWith<$Res>
       int defActual,
       int power,
       int maxDamage,
-      int minDamage});
+      int minDamage,
+      List<DamageScaleFactor> atkScaleFactorList,
+      List<DamageScaleFactor> defScaleFactorList,
+      DamageScaleFactor atkRank,
+      DamageScaleFactor defRank});
+
+  @override
+  $DamageScaleFactorCopyWith<$Res> get atkRank;
+  @override
+  $DamageScaleFactorCopyWith<$Res> get defRank;
 }
 
 /// @nodoc
@@ -197,6 +259,10 @@ class __$CalculatorStateCopyWithImpl<$Res>
     Object power = freezed,
     Object maxDamage = freezed,
     Object minDamage = freezed,
+    Object atkScaleFactorList = freezed,
+    Object defScaleFactorList = freezed,
+    Object atkRank = freezed,
+    Object defRank = freezed,
   }) {
     return _then(_CalculatorState(
       showingDetail: showingDetail == freezed
@@ -219,29 +285,41 @@ class __$CalculatorStateCopyWithImpl<$Res>
       power: power == freezed ? _value.power : power as int,
       maxDamage: maxDamage == freezed ? _value.maxDamage : maxDamage as int,
       minDamage: minDamage == freezed ? _value.minDamage : minDamage as int,
+      atkScaleFactorList: atkScaleFactorList == freezed
+          ? _value.atkScaleFactorList
+          : atkScaleFactorList as List<DamageScaleFactor>,
+      defScaleFactorList: defScaleFactorList == freezed
+          ? _value.defScaleFactorList
+          : defScaleFactorList as List<DamageScaleFactor>,
+      atkRank:
+          atkRank == freezed ? _value.atkRank : atkRank as DamageScaleFactor,
+      defRank:
+          defRank == freezed ? _value.defRank : defRank as DamageScaleFactor,
     ));
   }
 }
 
 /// @nodoc
-class _$_CalculatorState
-    with DiagnosticableTreeMixin
-    implements _CalculatorState {
+class _$_CalculatorState extends _CalculatorState with DiagnosticableTreeMixin {
   const _$_CalculatorState(
       {this.showingDetail = true,
-      this.atkBase = 0,
+      this.atkBase = 100,
       this.atkIndividual = 31,
       this.atkEffort = 0,
       this.atkNature = 1.0,
       this.atkActual = 0,
-      this.defBase = 0,
+      this.defBase = 100,
       this.defIndividual = 31,
       this.defEffort = 0,
       this.defNature = 1.0,
       this.defActual = 0,
       this.power = 100,
       this.maxDamage = 0,
-      this.minDamage = 0})
+      this.minDamage = 0,
+      this.atkScaleFactorList = const [],
+      this.defScaleFactorList = const [],
+      this.atkRank,
+      this.defRank})
       : assert(showingDetail != null),
         assert(atkBase != null),
         assert(atkIndividual != null),
@@ -255,12 +333,15 @@ class _$_CalculatorState
         assert(defActual != null),
         assert(power != null),
         assert(maxDamage != null),
-        assert(minDamage != null);
+        assert(minDamage != null),
+        assert(atkScaleFactorList != null),
+        assert(defScaleFactorList != null),
+        super._();
 
   @JsonKey(defaultValue: true)
   @override
   final bool showingDetail;
-  @JsonKey(defaultValue: 0)
+  @JsonKey(defaultValue: 100)
   @override
   final int atkBase;
   @JsonKey(defaultValue: 31)
@@ -275,7 +356,7 @@ class _$_CalculatorState
   @JsonKey(defaultValue: 0)
   @override
   final int atkActual;
-  @JsonKey(defaultValue: 0)
+  @JsonKey(defaultValue: 100)
   @override
   final int defBase;
   @JsonKey(defaultValue: 31)
@@ -299,10 +380,20 @@ class _$_CalculatorState
   @JsonKey(defaultValue: 0)
   @override
   final int minDamage;
+  @JsonKey(defaultValue: const [])
+  @override
+  final List<DamageScaleFactor> atkScaleFactorList;
+  @JsonKey(defaultValue: const [])
+  @override
+  final List<DamageScaleFactor> defScaleFactorList;
+  @override
+  final DamageScaleFactor atkRank;
+  @override
+  final DamageScaleFactor defRank;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'CalculatorState(showingDetail: $showingDetail, atkBase: $atkBase, atkIndividual: $atkIndividual, atkEffort: $atkEffort, atkNature: $atkNature, atkActual: $atkActual, defBase: $defBase, defIndividual: $defIndividual, defEffort: $defEffort, defNature: $defNature, defActual: $defActual, power: $power, maxDamage: $maxDamage, minDamage: $minDamage)';
+    return 'CalculatorState(showingDetail: $showingDetail, atkBase: $atkBase, atkIndividual: $atkIndividual, atkEffort: $atkEffort, atkNature: $atkNature, atkActual: $atkActual, defBase: $defBase, defIndividual: $defIndividual, defEffort: $defEffort, defNature: $defNature, defActual: $defActual, power: $power, maxDamage: $maxDamage, minDamage: $minDamage, atkScaleFactorList: $atkScaleFactorList, defScaleFactorList: $defScaleFactorList, atkRank: $atkRank, defRank: $defRank)';
   }
 
   @override
@@ -323,7 +414,11 @@ class _$_CalculatorState
       ..add(DiagnosticsProperty('defActual', defActual))
       ..add(DiagnosticsProperty('power', power))
       ..add(DiagnosticsProperty('maxDamage', maxDamage))
-      ..add(DiagnosticsProperty('minDamage', minDamage));
+      ..add(DiagnosticsProperty('minDamage', minDamage))
+      ..add(DiagnosticsProperty('atkScaleFactorList', atkScaleFactorList))
+      ..add(DiagnosticsProperty('defScaleFactorList', defScaleFactorList))
+      ..add(DiagnosticsProperty('atkRank', atkRank))
+      ..add(DiagnosticsProperty('defRank', defRank));
   }
 
   @override
@@ -370,7 +465,18 @@ class _$_CalculatorState
                     .equals(other.maxDamage, maxDamage)) &&
             (identical(other.minDamage, minDamage) ||
                 const DeepCollectionEquality()
-                    .equals(other.minDamage, minDamage)));
+                    .equals(other.minDamage, minDamage)) &&
+            (identical(other.atkScaleFactorList, atkScaleFactorList) ||
+                const DeepCollectionEquality()
+                    .equals(other.atkScaleFactorList, atkScaleFactorList)) &&
+            (identical(other.defScaleFactorList, defScaleFactorList) ||
+                const DeepCollectionEquality()
+                    .equals(other.defScaleFactorList, defScaleFactorList)) &&
+            (identical(other.atkRank, atkRank) ||
+                const DeepCollectionEquality()
+                    .equals(other.atkRank, atkRank)) &&
+            (identical(other.defRank, defRank) ||
+                const DeepCollectionEquality().equals(other.defRank, defRank)));
   }
 
   @override
@@ -389,7 +495,11 @@ class _$_CalculatorState
       const DeepCollectionEquality().hash(defActual) ^
       const DeepCollectionEquality().hash(power) ^
       const DeepCollectionEquality().hash(maxDamage) ^
-      const DeepCollectionEquality().hash(minDamage);
+      const DeepCollectionEquality().hash(minDamage) ^
+      const DeepCollectionEquality().hash(atkScaleFactorList) ^
+      const DeepCollectionEquality().hash(defScaleFactorList) ^
+      const DeepCollectionEquality().hash(atkRank) ^
+      const DeepCollectionEquality().hash(defRank);
 
   @JsonKey(ignore: true)
   @override
@@ -397,7 +507,8 @@ class _$_CalculatorState
       __$CalculatorStateCopyWithImpl<_CalculatorState>(this, _$identity);
 }
 
-abstract class _CalculatorState implements CalculatorState {
+abstract class _CalculatorState extends CalculatorState {
+  const _CalculatorState._() : super._();
   const factory _CalculatorState(
       {bool showingDetail,
       int atkBase,
@@ -412,7 +523,11 @@ abstract class _CalculatorState implements CalculatorState {
       int defActual,
       int power,
       int maxDamage,
-      int minDamage}) = _$_CalculatorState;
+      int minDamage,
+      List<DamageScaleFactor> atkScaleFactorList,
+      List<DamageScaleFactor> defScaleFactorList,
+      DamageScaleFactor atkRank,
+      DamageScaleFactor defRank}) = _$_CalculatorState;
 
   @override
   bool get showingDetail;
@@ -443,6 +558,185 @@ abstract class _CalculatorState implements CalculatorState {
   @override
   int get minDamage;
   @override
+  List<DamageScaleFactor> get atkScaleFactorList;
+  @override
+  List<DamageScaleFactor> get defScaleFactorList;
+  @override
+  DamageScaleFactor get atkRank;
+  @override
+  DamageScaleFactor get defRank;
+  @override
   @JsonKey(ignore: true)
   _$CalculatorStateCopyWith<_CalculatorState> get copyWith;
+}
+
+/// @nodoc
+class _$DamageScaleFactorTearOff {
+  const _$DamageScaleFactorTearOff();
+
+// ignore: unused_element
+  _DamageScaleFactor call(String label, double scaleFactor,
+      {bool isEnabled = false}) {
+    return _DamageScaleFactor(
+      label,
+      scaleFactor,
+      isEnabled: isEnabled,
+    );
+  }
+}
+
+/// @nodoc
+// ignore: unused_element
+const $DamageScaleFactor = _$DamageScaleFactorTearOff();
+
+/// @nodoc
+mixin _$DamageScaleFactor {
+  String get label;
+  double get scaleFactor;
+  bool get isEnabled;
+
+  @JsonKey(ignore: true)
+  $DamageScaleFactorCopyWith<DamageScaleFactor> get copyWith;
+}
+
+/// @nodoc
+abstract class $DamageScaleFactorCopyWith<$Res> {
+  factory $DamageScaleFactorCopyWith(
+          DamageScaleFactor value, $Res Function(DamageScaleFactor) then) =
+      _$DamageScaleFactorCopyWithImpl<$Res>;
+  $Res call({String label, double scaleFactor, bool isEnabled});
+}
+
+/// @nodoc
+class _$DamageScaleFactorCopyWithImpl<$Res>
+    implements $DamageScaleFactorCopyWith<$Res> {
+  _$DamageScaleFactorCopyWithImpl(this._value, this._then);
+
+  final DamageScaleFactor _value;
+  // ignore: unused_field
+  final $Res Function(DamageScaleFactor) _then;
+
+  @override
+  $Res call({
+    Object label = freezed,
+    Object scaleFactor = freezed,
+    Object isEnabled = freezed,
+  }) {
+    return _then(_value.copyWith(
+      label: label == freezed ? _value.label : label as String,
+      scaleFactor:
+          scaleFactor == freezed ? _value.scaleFactor : scaleFactor as double,
+      isEnabled: isEnabled == freezed ? _value.isEnabled : isEnabled as bool,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$DamageScaleFactorCopyWith<$Res>
+    implements $DamageScaleFactorCopyWith<$Res> {
+  factory _$DamageScaleFactorCopyWith(
+          _DamageScaleFactor value, $Res Function(_DamageScaleFactor) then) =
+      __$DamageScaleFactorCopyWithImpl<$Res>;
+  @override
+  $Res call({String label, double scaleFactor, bool isEnabled});
+}
+
+/// @nodoc
+class __$DamageScaleFactorCopyWithImpl<$Res>
+    extends _$DamageScaleFactorCopyWithImpl<$Res>
+    implements _$DamageScaleFactorCopyWith<$Res> {
+  __$DamageScaleFactorCopyWithImpl(
+      _DamageScaleFactor _value, $Res Function(_DamageScaleFactor) _then)
+      : super(_value, (v) => _then(v as _DamageScaleFactor));
+
+  @override
+  _DamageScaleFactor get _value => super._value as _DamageScaleFactor;
+
+  @override
+  $Res call({
+    Object label = freezed,
+    Object scaleFactor = freezed,
+    Object isEnabled = freezed,
+  }) {
+    return _then(_DamageScaleFactor(
+      label == freezed ? _value.label : label as String,
+      scaleFactor == freezed ? _value.scaleFactor : scaleFactor as double,
+      isEnabled: isEnabled == freezed ? _value.isEnabled : isEnabled as bool,
+    ));
+  }
+}
+
+/// @nodoc
+class _$_DamageScaleFactor
+    with DiagnosticableTreeMixin
+    implements _DamageScaleFactor {
+  const _$_DamageScaleFactor(this.label, this.scaleFactor,
+      {this.isEnabled = false})
+      : assert(label != null),
+        assert(scaleFactor != null),
+        assert(isEnabled != null);
+
+  @override
+  final String label;
+  @override
+  final double scaleFactor;
+  @JsonKey(defaultValue: false)
+  @override
+  final bool isEnabled;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'DamageScaleFactor(label: $label, scaleFactor: $scaleFactor, isEnabled: $isEnabled)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DamageScaleFactor'))
+      ..add(DiagnosticsProperty('label', label))
+      ..add(DiagnosticsProperty('scaleFactor', scaleFactor))
+      ..add(DiagnosticsProperty('isEnabled', isEnabled));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _DamageScaleFactor &&
+            (identical(other.label, label) ||
+                const DeepCollectionEquality().equals(other.label, label)) &&
+            (identical(other.scaleFactor, scaleFactor) ||
+                const DeepCollectionEquality()
+                    .equals(other.scaleFactor, scaleFactor)) &&
+            (identical(other.isEnabled, isEnabled) ||
+                const DeepCollectionEquality()
+                    .equals(other.isEnabled, isEnabled)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(label) ^
+      const DeepCollectionEquality().hash(scaleFactor) ^
+      const DeepCollectionEquality().hash(isEnabled);
+
+  @JsonKey(ignore: true)
+  @override
+  _$DamageScaleFactorCopyWith<_DamageScaleFactor> get copyWith =>
+      __$DamageScaleFactorCopyWithImpl<_DamageScaleFactor>(this, _$identity);
+}
+
+abstract class _DamageScaleFactor implements DamageScaleFactor {
+  const factory _DamageScaleFactor(String label, double scaleFactor,
+      {bool isEnabled}) = _$_DamageScaleFactor;
+
+  @override
+  String get label;
+  @override
+  double get scaleFactor;
+  @override
+  bool get isEnabled;
+  @override
+  @JsonKey(ignore: true)
+  _$DamageScaleFactorCopyWith<_DamageScaleFactor> get copyWith;
 }

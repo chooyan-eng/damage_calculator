@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final calculatorProvider = StateNotifierProvider<CalculatorController>(
-  (_) => CalculatorController(),
+  (_) => CalculatorController()..init(),
 );
 
 class CalculatorPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final controller = watch<CalculatorController>(calculatorProvider);
+    final controller = context.read(calculatorProvider);
     final state = watch<CalculatorState>(calculatorProvider.state);
 
     return Scaffold(
@@ -196,8 +196,11 @@ class CalculatorPage extends ConsumerWidget {
                                     child: ValueInput(
                                       controller:
                                           controller.atkActualController,
-                                      onChanged: (value) => controller
-                                          .updateStatus(atkActual: value),
+                                      onChanged: (value) =>
+                                          controller.updateStatus(
+                                        atkActual: value,
+                                        defActual: state.defActual,
+                                      ),
                                     ),
                                   ),
                                   const SizedBox(width: 32),
@@ -205,8 +208,10 @@ class CalculatorPage extends ConsumerWidget {
                                     child: ValueInput(
                                       controller:
                                           controller.defActualController,
-                                      onChanged: (value) => controller
-                                          .updateStatus(defActual: value),
+                                      onChanged: (value) =>
+                                          controller.updateStatus(
+                                              defActual: value,
+                                              atkActual: state.atkActual),
                                     ),
                                   ),
                                 ],
@@ -226,10 +231,152 @@ class CalculatorPage extends ConsumerWidget {
                                   Expanded(child: SizedBox.shrink()),
                                 ],
                               ),
+                              const SizedBox(height: 40),
+                              Text('ダメージ補正', style: TextStyles.label),
+                              const SizedBox(height: 4),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: Wrap(
+                                      spacing: 4,
+                                      children: state.atkScaleFactorList
+                                          .map<FilterChip>(
+                                            (element) => FilterChip(
+                                              onSelected: (value) {
+                                                controller
+                                                    .updateDamageScaleFactor(
+                                                  atkScaleFactor: element,
+                                                );
+                                              },
+                                              label: Text(
+                                                element.label,
+                                                style: TextStyle(
+                                                  fontSize: 10,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                              selected: element.isEnabled,
+                                              selectedColor: Colors.blue,
+                                              showCheckmark: false,
+                                            ),
+                                          )
+                                          .toList(),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 32),
+                                  Expanded(
+                                    child: Wrap(
+                                      spacing: 4,
+                                      children: state.defScaleFactorList
+                                          .map<FilterChip>(
+                                            (element) => FilterChip(
+                                              onSelected: (value) {
+                                                controller
+                                                    .updateDamageScaleFactor(
+                                                  defScaleFactor: element,
+                                                );
+                                              },
+                                              label: Text(
+                                                element.label,
+                                                style: TextStyle(
+                                                  fontSize: 10,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                              selected: element.isEnabled,
+                                              selectedColor: Colors.blue,
+                                              showCheckmark: false,
+                                            ),
+                                          )
+                                          .toList(),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 40),
+                              Text('ランク補正', style: TextStyles.label),
+                              const SizedBox(height: 4),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: Center(
+                                      child: DropdownButton<DamageScaleFactor>(
+                                        value: state.atkRank,
+                                        icon: Icon(Icons.keyboard_arrow_down),
+                                        iconSize: 24,
+                                        elevation: 16,
+                                        style: TextStyle(color: Colors.blue),
+                                        underline: Container(
+                                          height: 2,
+                                          color: Colors.blue,
+                                        ),
+                                        onChanged:
+                                            (DamageScaleFactor newValue) =>
+                                                controller.updateRank(
+                                                    atkRank: newValue),
+                                        items: CalculatorController.rankList
+                                            .map<
+                                                    DropdownMenuItem<
+                                                        DamageScaleFactor>>(
+                                                (DamageScaleFactor value) {
+                                          return DropdownMenuItem<
+                                              DamageScaleFactor>(
+                                            value: value,
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 32),
+                                              child: Text(value.label),
+                                            ),
+                                          );
+                                        }).toList(),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 32),
+                                  Expanded(
+                                    child: Center(
+                                      child: DropdownButton<DamageScaleFactor>(
+                                        value: state.defRank,
+                                        icon: Icon(Icons.keyboard_arrow_down),
+                                        iconSize: 24,
+                                        elevation: 16,
+                                        style: TextStyle(color: Colors.blue),
+                                        underline: Container(
+                                          height: 2,
+                                          color: Colors.blue,
+                                        ),
+                                        onChanged:
+                                            (DamageScaleFactor newValue) =>
+                                                controller.updateRank(
+                                                    defRank: newValue),
+                                        items: CalculatorController.rankList
+                                            .map<
+                                                    DropdownMenuItem<
+                                                        DamageScaleFactor>>(
+                                                (DamageScaleFactor value) {
+                                          return DropdownMenuItem<
+                                              DamageScaleFactor>(
+                                            value: value,
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 32),
+                                              child: Text(value.label),
+                                            ),
+                                          );
+                                        }).toList(),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ),
-                        const SizedBox(height: 40),
+                        const SizedBox(height: 120),
                       ],
                     ),
                   ),

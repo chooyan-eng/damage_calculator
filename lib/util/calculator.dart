@@ -38,6 +38,8 @@ class Calculator {
     int level = 50,
     double scaleFactor = 1.0,
   }) {
+    if (defence == 0) return [0, 0];
+
     final max = ((level * 2 ~/ 5 + 2) * power * attack ~/ defence) ~/ 50 + 2;
     final withScale = (max * scaleFactor).toInt();
     return [(withScale * 0.85).toInt(), withScale];
