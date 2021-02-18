@@ -61,6 +61,7 @@ Map<String, dynamic> _$_$_CalculatorStateToJson(_$_CalculatorState instance) =>
 
 _$_StatusParams _$_$_StatusParamsFromJson(Map<String, dynamic> json) {
   return _$_StatusParams(
+    name: json['name'] as String ?? '',
     base: json['base'] as int ?? 100,
     individual: json['individual'] as int ?? 31,
     effort: json['effort'] as int ?? 0,
@@ -70,6 +71,7 @@ _$_StatusParams _$_$_StatusParamsFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$_$_StatusParamsToJson(_$_StatusParams instance) =>
     <String, dynamic>{
+      'name': instance.name,
       'base': instance.base,
       'individual': instance.individual,
       'effort': instance.effort,

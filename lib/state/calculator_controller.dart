@@ -46,6 +46,7 @@ abstract class StatusParams with _$StatusParams {
   const StatusParams._();
 
   const factory StatusParams({
+    @Default('') String name,
     @Default(100) int base,
     @Default(31) int individual,
     @Default(0) int effort,
@@ -99,9 +100,8 @@ class CalculatorController extends StateNotifier<CalculatorState> {
     const DamageScaleFactor('-6', 1 / 4),
   ];
 
-  final atkActualController = TextEditingController()..text = '0';
-  final defActualController = TextEditingController()..text = '0';
-  final powerController = TextEditingController()..text = '100';
+  final atkActualController = TextEditingController();
+  final defActualController = TextEditingController();
 
   CalculatorController() : super(const CalculatorState());
 
@@ -148,11 +148,13 @@ class CalculatorController extends StateNotifier<CalculatorState> {
   }
 
   void updateStatus({
+    String atkName,
     int atkBase,
     int atkIndividual,
     int atkEffort,
     double atkNature,
     int atkActual,
+    String defName,
     int defBase,
     int defIndividual,
     int defEffort,
@@ -161,12 +163,14 @@ class CalculatorController extends StateNotifier<CalculatorState> {
   }) {
     state = state.copyWith(
       atk: state.atk.copyWith(
+        name: atkName ?? state.atk.name,
         base: atkBase ?? state.atk.base,
         individual: atkIndividual ?? state.atk.individual,
         effort: atkEffort ?? state.atk.effort,
         nature: atkNature ?? state.atk.nature,
       ),
       def: state.def.copyWith(
+        name: defName ?? state.def.name,
         base: defBase ?? state.def.base,
         individual: defIndividual ?? state.def.individual,
         effort: defEffort ?? state.def.effort,

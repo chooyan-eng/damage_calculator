@@ -1,4 +1,5 @@
 import 'package:damage_calculator/state/calculator_controller.dart';
+import 'package:damage_calculator/view/widget/string_input.dart';
 import 'package:damage_calculator/view/widget/text_styles.dart';
 import 'package:damage_calculator/view/widget/status_input.dart';
 import 'package:damage_calculator/view/widget/value_input.dart';
@@ -42,23 +43,49 @@ class CalculatorPage extends ConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: OutlinedButton(
-                              onPressed: () => controller.toggleShowingDetail(),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    '実数値計算機を${state.showingDetail ? "隠す" : "表示"}',
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(height: 16),
+                                Text('名前', style: TextStyles.label),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: StringInput(
+                                        onChanged: (value) => controller
+                                            .updateStatus(atkName: value),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 32),
+                                    Expanded(
+                                      child: StringInput(
+                                        onChanged: (value) => controller
+                                            .updateStatus(defName: value),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 16),
+                                OutlinedButton(
+                                  onPressed: () =>
+                                      controller.toggleShowingDetail(),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        '実数値計算機を${state.showingDetail ? "隠す" : "表示"}',
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Icon(
+                                        state.showingDetail
+                                            ? Icons.keyboard_arrow_down
+                                            : Icons.keyboard_arrow_right,
+                                      ),
+                                    ],
                                   ),
-                                  const SizedBox(width: 8),
-                                  Icon(
-                                    state.showingDetail
-                                        ? Icons.keyboard_arrow_down
-                                        : Icons.keyboard_arrow_right,
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
                           if (state.showingDetail)
@@ -251,7 +278,7 @@ class CalculatorPage extends ConsumerWidget {
             children: [
               Expanded(
                 child: ValueInput(
-                  controller: controller.powerController,
+                  value: state.power.toString(),
                   onChanged: (value) => controller.updateDamage(power: value),
                 ),
               ),

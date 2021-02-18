@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class ValueInput extends StatefulWidget {
+class StringInput extends StatefulWidget {
   final TextEditingController controller;
-  final ValueChanged<int> onChanged;
+  final ValueChanged<String> onChanged;
   final String value;
 
-  const ValueInput({
+  const StringInput({
     Key key,
     this.controller,
     this.onChanged,
@@ -13,10 +13,10 @@ class ValueInput extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _ValueInputState createState() => _ValueInputState();
+  _StringInputState createState() => _StringInputState();
 }
 
-class _ValueInputState extends State<ValueInput> {
+class _StringInputState extends State<StringInput> {
   TextEditingController _controller;
 
   @override
@@ -29,13 +29,13 @@ class _ValueInputState extends State<ValueInput> {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      style: TextStyle(fontSize: 20),
+      style: TextStyle(fontSize: 16),
       controller: _controller,
       textAlign: TextAlign.center,
       maxLines: 1,
       decoration: InputDecoration(),
       keyboardType: TextInputType.number,
-      onChanged: (value) => widget.onChanged(int.parse(value)),
+      onChanged: widget.onChanged,
     );
   }
 }
