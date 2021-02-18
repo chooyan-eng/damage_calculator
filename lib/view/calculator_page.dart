@@ -109,11 +109,11 @@ class CalculatorPage extends ConsumerWidget {
                     ),
                     color: Colors.blue,
                   ),
-                  height: 40,
+                  height: 24,
                   width: MediaQuery.of(context).size.width,
                   child: Center(
                     child: Text(
-                      'HP',
+                      'H P',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
@@ -130,7 +130,7 @@ class CalculatorPage extends ConsumerWidget {
                         children: [
                           Center(
                             child: Text(
-                              '${state.hpActual}',
+                              '${state.hp.actual}',
                               style: TextStyle(
                                 fontSize: 40,
                                 color: Colors.blue,
@@ -147,7 +147,7 @@ class CalculatorPage extends ConsumerWidget {
                                         Text('1 / $ratio',
                                             style: TextStyles.label),
                                         const SizedBox(height: 8),
-                                        Text('${state.hpActual ~/ ratio}',
+                                        Text('${state.hp.actual ~/ ratio}',
                                             style: TextStyles.damage),
                                       ],
                                     ),
@@ -165,7 +165,7 @@ class CalculatorPage extends ConsumerWidget {
                                   children: [
                                     Text('種族値', style: TextStyles.label),
                                     StatusInput(
-                                      value: state.hpBase,
+                                      value: state.hp.base,
                                       onChanged: (value) =>
                                           controller.updateHp(hpBase: value),
                                     ),
@@ -179,7 +179,7 @@ class CalculatorPage extends ConsumerWidget {
                                   children: [
                                     Text('個体値', style: TextStyles.label),
                                     StatusInput(
-                                      value: state.hpIndividual,
+                                      value: state.hp.individual,
                                       onChanged: (value) => controller.updateHp(
                                           hpIndividual: value),
                                     ),
@@ -193,7 +193,7 @@ class CalculatorPage extends ConsumerWidget {
                                   children: [
                                     Text('努力値', style: TextStyles.label),
                                     StatusInput(
-                                      value: state.hpEffort,
+                                      value: state.hp.effort,
                                       selections: [0, 4, 252],
                                       onChanged: (value) =>
                                           controller.updateHp(hpEffort: value),
@@ -234,7 +234,7 @@ class CalculatorPage extends ConsumerWidget {
                   controller: controller.atkActualController,
                   onChanged: (value) => controller.updateStatus(
                     atkActual: value,
-                    defActual: state.defActual,
+                    defActual: state.def.actual,
                   ),
                 ),
               ),
@@ -243,7 +243,7 @@ class CalculatorPage extends ConsumerWidget {
                 child: ValueInput(
                   controller: controller.defActualController,
                   onChanged: (value) => controller.updateStatus(
-                      defActual: value, atkActual: state.atkActual),
+                      defActual: value, atkActual: state.atk.actual),
                 ),
               ),
             ],
@@ -408,14 +408,14 @@ class CalculatorPage extends ConsumerWidget {
             children: [
               Expanded(
                 child: StatusInput(
-                  value: state.atkBase,
+                  value: state.atk.base,
                   onChanged: (value) => controller.updateStatus(atkBase: value),
                 ),
               ),
               const SizedBox(width: 32),
               Expanded(
                 child: StatusInput(
-                  value: state.defBase,
+                  value: state.def.base,
                   onChanged: (value) => controller.updateStatus(defBase: value),
                 ),
               ),
@@ -427,7 +427,7 @@ class CalculatorPage extends ConsumerWidget {
             children: [
               Expanded(
                 child: StatusInput(
-                  value: state.atkIndividual,
+                  value: state.atk.individual,
                   onChanged: (value) =>
                       controller.updateStatus(atkIndividual: value),
                 ),
@@ -435,7 +435,7 @@ class CalculatorPage extends ConsumerWidget {
               const SizedBox(width: 32),
               Expanded(
                 child: StatusInput(
-                  value: state.defIndividual,
+                  value: state.def.individual,
                   onChanged: (value) =>
                       controller.updateStatus(defIndividual: value),
                 ),
@@ -449,7 +449,7 @@ class CalculatorPage extends ConsumerWidget {
               Expanded(
                 child: StatusInput(
                   selections: [0, 4, 252],
-                  value: state.atkEffort,
+                  value: state.atk.effort,
                   onChanged: (value) =>
                       controller.updateStatus(atkEffort: value),
                 ),
@@ -458,7 +458,7 @@ class CalculatorPage extends ConsumerWidget {
               Expanded(
                 child: StatusInput(
                   selections: [0, 4, 252],
-                  value: state.defEffort,
+                  value: state.def.effort,
                   onChanged: (value) =>
                       controller.updateStatus(defEffort: value),
                 ),
@@ -474,7 +474,7 @@ class CalculatorPage extends ConsumerWidget {
                 child: Center(
                   child: ToggleButtons(
                     isSelected: CalculatorController.natureValues
-                        .map((value) => value == state.atkNature)
+                        .map((value) => value == state.atk.nature)
                         .toList(),
                     onPressed: (value) => controller.updateStatus(
                         atkNature: CalculatorController.natureValues[value]),
@@ -490,7 +490,7 @@ class CalculatorPage extends ConsumerWidget {
                 child: Center(
                   child: ToggleButtons(
                     isSelected: CalculatorController.natureValues
-                        .map((value) => value == state.defNature)
+                        .map((value) => value == state.def.nature)
                         .toList(),
                     onPressed: (value) => controller.updateStatus(
                         defNature: CalculatorController.natureValues[value]),

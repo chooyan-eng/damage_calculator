@@ -8,6 +8,9 @@ part of 'calculator_controller.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+CalculatorState _$CalculatorStateFromJson(Map<String, dynamic> json) {
+  return _CalculatorState.fromJson(json);
+}
 
 /// @nodoc
 class _$CalculatorStateTearOff {
@@ -16,16 +19,8 @@ class _$CalculatorStateTearOff {
 // ignore: unused_element
   _CalculatorState call(
       {bool showingDetail = true,
-      int atkBase = 100,
-      int atkIndividual = 31,
-      int atkEffort = 0,
-      double atkNature = 1.0,
-      int atkActual = 0,
-      int defBase = 100,
-      int defIndividual = 31,
-      int defEffort = 0,
-      double defNature = 1.0,
-      int defActual = 0,
+      StatusParams atk,
+      StatusParams def,
       int power = 100,
       int maxDamage = 0,
       int minDamage = 0,
@@ -33,22 +28,11 @@ class _$CalculatorStateTearOff {
       List<DamageScaleFactor> defScaleFactorList = const [],
       DamageScaleFactor atkRank,
       DamageScaleFactor defRank,
-      int hpBase = 100,
-      int hpIndividual = 31,
-      int hpEffort = 0,
-      int hpActual = 0}) {
+      StatusParams hp}) {
     return _CalculatorState(
       showingDetail: showingDetail,
-      atkBase: atkBase,
-      atkIndividual: atkIndividual,
-      atkEffort: atkEffort,
-      atkNature: atkNature,
-      atkActual: atkActual,
-      defBase: defBase,
-      defIndividual: defIndividual,
-      defEffort: defEffort,
-      defNature: defNature,
-      defActual: defActual,
+      atk: atk,
+      def: def,
       power: power,
       maxDamage: maxDamage,
       minDamage: minDamage,
@@ -56,11 +40,13 @@ class _$CalculatorStateTearOff {
       defScaleFactorList: defScaleFactorList,
       atkRank: atkRank,
       defRank: defRank,
-      hpBase: hpBase,
-      hpIndividual: hpIndividual,
-      hpEffort: hpEffort,
-      hpActual: hpActual,
+      hp: hp,
     );
+  }
+
+// ignore: unused_element
+  CalculatorState fromJson(Map<String, Object> json) {
+    return CalculatorState.fromJson(json);
   }
 }
 
@@ -71,16 +57,8 @@ const $CalculatorState = _$CalculatorStateTearOff();
 /// @nodoc
 mixin _$CalculatorState {
   bool get showingDetail;
-  int get atkBase;
-  int get atkIndividual;
-  int get atkEffort;
-  double get atkNature;
-  int get atkActual;
-  int get defBase;
-  int get defIndividual;
-  int get defEffort;
-  double get defNature;
-  int get defActual;
+  StatusParams get atk;
+  StatusParams get def;
   int get power;
   int get maxDamage;
   int get minDamage;
@@ -88,11 +66,9 @@ mixin _$CalculatorState {
   List<DamageScaleFactor> get defScaleFactorList;
   DamageScaleFactor get atkRank;
   DamageScaleFactor get defRank;
-  int get hpBase;
-  int get hpIndividual;
-  int get hpEffort;
-  int get hpActual;
+  StatusParams get hp;
 
+  Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
   $CalculatorStateCopyWith<CalculatorState> get copyWith;
 }
@@ -104,16 +80,8 @@ abstract class $CalculatorStateCopyWith<$Res> {
       _$CalculatorStateCopyWithImpl<$Res>;
   $Res call(
       {bool showingDetail,
-      int atkBase,
-      int atkIndividual,
-      int atkEffort,
-      double atkNature,
-      int atkActual,
-      int defBase,
-      int defIndividual,
-      int defEffort,
-      double defNature,
-      int defActual,
+      StatusParams atk,
+      StatusParams def,
       int power,
       int maxDamage,
       int minDamage,
@@ -121,13 +89,13 @@ abstract class $CalculatorStateCopyWith<$Res> {
       List<DamageScaleFactor> defScaleFactorList,
       DamageScaleFactor atkRank,
       DamageScaleFactor defRank,
-      int hpBase,
-      int hpIndividual,
-      int hpEffort,
-      int hpActual});
+      StatusParams hp});
 
+  $StatusParamsCopyWith<$Res> get atk;
+  $StatusParamsCopyWith<$Res> get def;
   $DamageScaleFactorCopyWith<$Res> get atkRank;
   $DamageScaleFactorCopyWith<$Res> get defRank;
+  $StatusParamsCopyWith<$Res> get hp;
 }
 
 /// @nodoc
@@ -142,16 +110,8 @@ class _$CalculatorStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object showingDetail = freezed,
-    Object atkBase = freezed,
-    Object atkIndividual = freezed,
-    Object atkEffort = freezed,
-    Object atkNature = freezed,
-    Object atkActual = freezed,
-    Object defBase = freezed,
-    Object defIndividual = freezed,
-    Object defEffort = freezed,
-    Object defNature = freezed,
-    Object defActual = freezed,
+    Object atk = freezed,
+    Object def = freezed,
     Object power = freezed,
     Object maxDamage = freezed,
     Object minDamage = freezed,
@@ -159,29 +119,14 @@ class _$CalculatorStateCopyWithImpl<$Res>
     Object defScaleFactorList = freezed,
     Object atkRank = freezed,
     Object defRank = freezed,
-    Object hpBase = freezed,
-    Object hpIndividual = freezed,
-    Object hpEffort = freezed,
-    Object hpActual = freezed,
+    Object hp = freezed,
   }) {
     return _then(_value.copyWith(
       showingDetail: showingDetail == freezed
           ? _value.showingDetail
           : showingDetail as bool,
-      atkBase: atkBase == freezed ? _value.atkBase : atkBase as int,
-      atkIndividual: atkIndividual == freezed
-          ? _value.atkIndividual
-          : atkIndividual as int,
-      atkEffort: atkEffort == freezed ? _value.atkEffort : atkEffort as int,
-      atkNature: atkNature == freezed ? _value.atkNature : atkNature as double,
-      atkActual: atkActual == freezed ? _value.atkActual : atkActual as int,
-      defBase: defBase == freezed ? _value.defBase : defBase as int,
-      defIndividual: defIndividual == freezed
-          ? _value.defIndividual
-          : defIndividual as int,
-      defEffort: defEffort == freezed ? _value.defEffort : defEffort as int,
-      defNature: defNature == freezed ? _value.defNature : defNature as double,
-      defActual: defActual == freezed ? _value.defActual : defActual as int,
+      atk: atk == freezed ? _value.atk : atk as StatusParams,
+      def: def == freezed ? _value.def : def as StatusParams,
       power: power == freezed ? _value.power : power as int,
       maxDamage: maxDamage == freezed ? _value.maxDamage : maxDamage as int,
       minDamage: minDamage == freezed ? _value.minDamage : minDamage as int,
@@ -195,12 +140,28 @@ class _$CalculatorStateCopyWithImpl<$Res>
           atkRank == freezed ? _value.atkRank : atkRank as DamageScaleFactor,
       defRank:
           defRank == freezed ? _value.defRank : defRank as DamageScaleFactor,
-      hpBase: hpBase == freezed ? _value.hpBase : hpBase as int,
-      hpIndividual:
-          hpIndividual == freezed ? _value.hpIndividual : hpIndividual as int,
-      hpEffort: hpEffort == freezed ? _value.hpEffort : hpEffort as int,
-      hpActual: hpActual == freezed ? _value.hpActual : hpActual as int,
+      hp: hp == freezed ? _value.hp : hp as StatusParams,
     ));
+  }
+
+  @override
+  $StatusParamsCopyWith<$Res> get atk {
+    if (_value.atk == null) {
+      return null;
+    }
+    return $StatusParamsCopyWith<$Res>(_value.atk, (value) {
+      return _then(_value.copyWith(atk: value));
+    });
+  }
+
+  @override
+  $StatusParamsCopyWith<$Res> get def {
+    if (_value.def == null) {
+      return null;
+    }
+    return $StatusParamsCopyWith<$Res>(_value.def, (value) {
+      return _then(_value.copyWith(def: value));
+    });
   }
 
   @override
@@ -222,6 +183,16 @@ class _$CalculatorStateCopyWithImpl<$Res>
       return _then(_value.copyWith(defRank: value));
     });
   }
+
+  @override
+  $StatusParamsCopyWith<$Res> get hp {
+    if (_value.hp == null) {
+      return null;
+    }
+    return $StatusParamsCopyWith<$Res>(_value.hp, (value) {
+      return _then(_value.copyWith(hp: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -233,16 +204,8 @@ abstract class _$CalculatorStateCopyWith<$Res>
   @override
   $Res call(
       {bool showingDetail,
-      int atkBase,
-      int atkIndividual,
-      int atkEffort,
-      double atkNature,
-      int atkActual,
-      int defBase,
-      int defIndividual,
-      int defEffort,
-      double defNature,
-      int defActual,
+      StatusParams atk,
+      StatusParams def,
       int power,
       int maxDamage,
       int minDamage,
@@ -250,15 +213,18 @@ abstract class _$CalculatorStateCopyWith<$Res>
       List<DamageScaleFactor> defScaleFactorList,
       DamageScaleFactor atkRank,
       DamageScaleFactor defRank,
-      int hpBase,
-      int hpIndividual,
-      int hpEffort,
-      int hpActual});
+      StatusParams hp});
 
+  @override
+  $StatusParamsCopyWith<$Res> get atk;
+  @override
+  $StatusParamsCopyWith<$Res> get def;
   @override
   $DamageScaleFactorCopyWith<$Res> get atkRank;
   @override
   $DamageScaleFactorCopyWith<$Res> get defRank;
+  @override
+  $StatusParamsCopyWith<$Res> get hp;
 }
 
 /// @nodoc
@@ -275,16 +241,8 @@ class __$CalculatorStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object showingDetail = freezed,
-    Object atkBase = freezed,
-    Object atkIndividual = freezed,
-    Object atkEffort = freezed,
-    Object atkNature = freezed,
-    Object atkActual = freezed,
-    Object defBase = freezed,
-    Object defIndividual = freezed,
-    Object defEffort = freezed,
-    Object defNature = freezed,
-    Object defActual = freezed,
+    Object atk = freezed,
+    Object def = freezed,
     Object power = freezed,
     Object maxDamage = freezed,
     Object minDamage = freezed,
@@ -292,29 +250,14 @@ class __$CalculatorStateCopyWithImpl<$Res>
     Object defScaleFactorList = freezed,
     Object atkRank = freezed,
     Object defRank = freezed,
-    Object hpBase = freezed,
-    Object hpIndividual = freezed,
-    Object hpEffort = freezed,
-    Object hpActual = freezed,
+    Object hp = freezed,
   }) {
     return _then(_CalculatorState(
       showingDetail: showingDetail == freezed
           ? _value.showingDetail
           : showingDetail as bool,
-      atkBase: atkBase == freezed ? _value.atkBase : atkBase as int,
-      atkIndividual: atkIndividual == freezed
-          ? _value.atkIndividual
-          : atkIndividual as int,
-      atkEffort: atkEffort == freezed ? _value.atkEffort : atkEffort as int,
-      atkNature: atkNature == freezed ? _value.atkNature : atkNature as double,
-      atkActual: atkActual == freezed ? _value.atkActual : atkActual as int,
-      defBase: defBase == freezed ? _value.defBase : defBase as int,
-      defIndividual: defIndividual == freezed
-          ? _value.defIndividual
-          : defIndividual as int,
-      defEffort: defEffort == freezed ? _value.defEffort : defEffort as int,
-      defNature: defNature == freezed ? _value.defNature : defNature as double,
-      defActual: defActual == freezed ? _value.defActual : defActual as int,
+      atk: atk == freezed ? _value.atk : atk as StatusParams,
+      def: def == freezed ? _value.def : def as StatusParams,
       power: power == freezed ? _value.power : power as int,
       maxDamage: maxDamage == freezed ? _value.maxDamage : maxDamage as int,
       minDamage: minDamage == freezed ? _value.minDamage : minDamage as int,
@@ -328,29 +271,19 @@ class __$CalculatorStateCopyWithImpl<$Res>
           atkRank == freezed ? _value.atkRank : atkRank as DamageScaleFactor,
       defRank:
           defRank == freezed ? _value.defRank : defRank as DamageScaleFactor,
-      hpBase: hpBase == freezed ? _value.hpBase : hpBase as int,
-      hpIndividual:
-          hpIndividual == freezed ? _value.hpIndividual : hpIndividual as int,
-      hpEffort: hpEffort == freezed ? _value.hpEffort : hpEffort as int,
-      hpActual: hpActual == freezed ? _value.hpActual : hpActual as int,
+      hp: hp == freezed ? _value.hp : hp as StatusParams,
     ));
   }
 }
+
+@JsonSerializable()
 
 /// @nodoc
 class _$_CalculatorState extends _CalculatorState with DiagnosticableTreeMixin {
   const _$_CalculatorState(
       {this.showingDetail = true,
-      this.atkBase = 100,
-      this.atkIndividual = 31,
-      this.atkEffort = 0,
-      this.atkNature = 1.0,
-      this.atkActual = 0,
-      this.defBase = 100,
-      this.defIndividual = 31,
-      this.defEffort = 0,
-      this.defNature = 1.0,
-      this.defActual = 0,
+      this.atk,
+      this.def,
       this.power = 100,
       this.maxDamage = 0,
       this.minDamage = 0,
@@ -358,65 +291,25 @@ class _$_CalculatorState extends _CalculatorState with DiagnosticableTreeMixin {
       this.defScaleFactorList = const [],
       this.atkRank,
       this.defRank,
-      this.hpBase = 100,
-      this.hpIndividual = 31,
-      this.hpEffort = 0,
-      this.hpActual = 0})
+      this.hp})
       : assert(showingDetail != null),
-        assert(atkBase != null),
-        assert(atkIndividual != null),
-        assert(atkEffort != null),
-        assert(atkNature != null),
-        assert(atkActual != null),
-        assert(defBase != null),
-        assert(defIndividual != null),
-        assert(defEffort != null),
-        assert(defNature != null),
-        assert(defActual != null),
         assert(power != null),
         assert(maxDamage != null),
         assert(minDamage != null),
         assert(atkScaleFactorList != null),
         assert(defScaleFactorList != null),
-        assert(hpBase != null),
-        assert(hpIndividual != null),
-        assert(hpEffort != null),
-        assert(hpActual != null),
         super._();
+
+  factory _$_CalculatorState.fromJson(Map<String, dynamic> json) =>
+      _$_$_CalculatorStateFromJson(json);
 
   @JsonKey(defaultValue: true)
   @override
   final bool showingDetail;
-  @JsonKey(defaultValue: 100)
   @override
-  final int atkBase;
-  @JsonKey(defaultValue: 31)
+  final StatusParams atk;
   @override
-  final int atkIndividual;
-  @JsonKey(defaultValue: 0)
-  @override
-  final int atkEffort;
-  @JsonKey(defaultValue: 1.0)
-  @override
-  final double atkNature;
-  @JsonKey(defaultValue: 0)
-  @override
-  final int atkActual;
-  @JsonKey(defaultValue: 100)
-  @override
-  final int defBase;
-  @JsonKey(defaultValue: 31)
-  @override
-  final int defIndividual;
-  @JsonKey(defaultValue: 0)
-  @override
-  final int defEffort;
-  @JsonKey(defaultValue: 1.0)
-  @override
-  final double defNature;
-  @JsonKey(defaultValue: 0)
-  @override
-  final int defActual;
+  final StatusParams def;
   @JsonKey(defaultValue: 100)
   @override
   final int power;
@@ -436,22 +329,12 @@ class _$_CalculatorState extends _CalculatorState with DiagnosticableTreeMixin {
   final DamageScaleFactor atkRank;
   @override
   final DamageScaleFactor defRank;
-  @JsonKey(defaultValue: 100)
   @override
-  final int hpBase;
-  @JsonKey(defaultValue: 31)
-  @override
-  final int hpIndividual;
-  @JsonKey(defaultValue: 0)
-  @override
-  final int hpEffort;
-  @JsonKey(defaultValue: 0)
-  @override
-  final int hpActual;
+  final StatusParams hp;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'CalculatorState(showingDetail: $showingDetail, atkBase: $atkBase, atkIndividual: $atkIndividual, atkEffort: $atkEffort, atkNature: $atkNature, atkActual: $atkActual, defBase: $defBase, defIndividual: $defIndividual, defEffort: $defEffort, defNature: $defNature, defActual: $defActual, power: $power, maxDamage: $maxDamage, minDamage: $minDamage, atkScaleFactorList: $atkScaleFactorList, defScaleFactorList: $defScaleFactorList, atkRank: $atkRank, defRank: $defRank, hpBase: $hpBase, hpIndividual: $hpIndividual, hpEffort: $hpEffort, hpActual: $hpActual)';
+    return 'CalculatorState(showingDetail: $showingDetail, atk: $atk, def: $def, power: $power, maxDamage: $maxDamage, minDamage: $minDamage, atkScaleFactorList: $atkScaleFactorList, defScaleFactorList: $defScaleFactorList, atkRank: $atkRank, defRank: $defRank, hp: $hp)';
   }
 
   @override
@@ -460,16 +343,8 @@ class _$_CalculatorState extends _CalculatorState with DiagnosticableTreeMixin {
     properties
       ..add(DiagnosticsProperty('type', 'CalculatorState'))
       ..add(DiagnosticsProperty('showingDetail', showingDetail))
-      ..add(DiagnosticsProperty('atkBase', atkBase))
-      ..add(DiagnosticsProperty('atkIndividual', atkIndividual))
-      ..add(DiagnosticsProperty('atkEffort', atkEffort))
-      ..add(DiagnosticsProperty('atkNature', atkNature))
-      ..add(DiagnosticsProperty('atkActual', atkActual))
-      ..add(DiagnosticsProperty('defBase', defBase))
-      ..add(DiagnosticsProperty('defIndividual', defIndividual))
-      ..add(DiagnosticsProperty('defEffort', defEffort))
-      ..add(DiagnosticsProperty('defNature', defNature))
-      ..add(DiagnosticsProperty('defActual', defActual))
+      ..add(DiagnosticsProperty('atk', atk))
+      ..add(DiagnosticsProperty('def', def))
       ..add(DiagnosticsProperty('power', power))
       ..add(DiagnosticsProperty('maxDamage', maxDamage))
       ..add(DiagnosticsProperty('minDamage', minDamage))
@@ -477,10 +352,7 @@ class _$_CalculatorState extends _CalculatorState with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('defScaleFactorList', defScaleFactorList))
       ..add(DiagnosticsProperty('atkRank', atkRank))
       ..add(DiagnosticsProperty('defRank', defRank))
-      ..add(DiagnosticsProperty('hpBase', hpBase))
-      ..add(DiagnosticsProperty('hpIndividual', hpIndividual))
-      ..add(DiagnosticsProperty('hpEffort', hpEffort))
-      ..add(DiagnosticsProperty('hpActual', hpActual));
+      ..add(DiagnosticsProperty('hp', hp));
   }
 
   @override
@@ -490,36 +362,10 @@ class _$_CalculatorState extends _CalculatorState with DiagnosticableTreeMixin {
             (identical(other.showingDetail, showingDetail) ||
                 const DeepCollectionEquality()
                     .equals(other.showingDetail, showingDetail)) &&
-            (identical(other.atkBase, atkBase) ||
-                const DeepCollectionEquality()
-                    .equals(other.atkBase, atkBase)) &&
-            (identical(other.atkIndividual, atkIndividual) ||
-                const DeepCollectionEquality()
-                    .equals(other.atkIndividual, atkIndividual)) &&
-            (identical(other.atkEffort, atkEffort) ||
-                const DeepCollectionEquality()
-                    .equals(other.atkEffort, atkEffort)) &&
-            (identical(other.atkNature, atkNature) ||
-                const DeepCollectionEquality()
-                    .equals(other.atkNature, atkNature)) &&
-            (identical(other.atkActual, atkActual) ||
-                const DeepCollectionEquality()
-                    .equals(other.atkActual, atkActual)) &&
-            (identical(other.defBase, defBase) ||
-                const DeepCollectionEquality()
-                    .equals(other.defBase, defBase)) &&
-            (identical(other.defIndividual, defIndividual) ||
-                const DeepCollectionEquality()
-                    .equals(other.defIndividual, defIndividual)) &&
-            (identical(other.defEffort, defEffort) ||
-                const DeepCollectionEquality()
-                    .equals(other.defEffort, defEffort)) &&
-            (identical(other.defNature, defNature) ||
-                const DeepCollectionEquality()
-                    .equals(other.defNature, defNature)) &&
-            (identical(other.defActual, defActual) ||
-                const DeepCollectionEquality()
-                    .equals(other.defActual, defActual)) &&
+            (identical(other.atk, atk) ||
+                const DeepCollectionEquality().equals(other.atk, atk)) &&
+            (identical(other.def, def) ||
+                const DeepCollectionEquality().equals(other.def, def)) &&
             (identical(other.power, power) ||
                 const DeepCollectionEquality().equals(other.power, power)) &&
             (identical(other.maxDamage, maxDamage) ||
@@ -540,33 +386,16 @@ class _$_CalculatorState extends _CalculatorState with DiagnosticableTreeMixin {
             (identical(other.defRank, defRank) ||
                 const DeepCollectionEquality()
                     .equals(other.defRank, defRank)) &&
-            (identical(other.hpBase, hpBase) ||
-                const DeepCollectionEquality().equals(other.hpBase, hpBase)) &&
-            (identical(other.hpIndividual, hpIndividual) ||
-                const DeepCollectionEquality()
-                    .equals(other.hpIndividual, hpIndividual)) &&
-            (identical(other.hpEffort, hpEffort) ||
-                const DeepCollectionEquality()
-                    .equals(other.hpEffort, hpEffort)) &&
-            (identical(other.hpActual, hpActual) ||
-                const DeepCollectionEquality()
-                    .equals(other.hpActual, hpActual)));
+            (identical(other.hp, hp) ||
+                const DeepCollectionEquality().equals(other.hp, hp)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(showingDetail) ^
-      const DeepCollectionEquality().hash(atkBase) ^
-      const DeepCollectionEquality().hash(atkIndividual) ^
-      const DeepCollectionEquality().hash(atkEffort) ^
-      const DeepCollectionEquality().hash(atkNature) ^
-      const DeepCollectionEquality().hash(atkActual) ^
-      const DeepCollectionEquality().hash(defBase) ^
-      const DeepCollectionEquality().hash(defIndividual) ^
-      const DeepCollectionEquality().hash(defEffort) ^
-      const DeepCollectionEquality().hash(defNature) ^
-      const DeepCollectionEquality().hash(defActual) ^
+      const DeepCollectionEquality().hash(atk) ^
+      const DeepCollectionEquality().hash(def) ^
       const DeepCollectionEquality().hash(power) ^
       const DeepCollectionEquality().hash(maxDamage) ^
       const DeepCollectionEquality().hash(minDamage) ^
@@ -574,31 +403,25 @@ class _$_CalculatorState extends _CalculatorState with DiagnosticableTreeMixin {
       const DeepCollectionEquality().hash(defScaleFactorList) ^
       const DeepCollectionEquality().hash(atkRank) ^
       const DeepCollectionEquality().hash(defRank) ^
-      const DeepCollectionEquality().hash(hpBase) ^
-      const DeepCollectionEquality().hash(hpIndividual) ^
-      const DeepCollectionEquality().hash(hpEffort) ^
-      const DeepCollectionEquality().hash(hpActual);
+      const DeepCollectionEquality().hash(hp);
 
   @JsonKey(ignore: true)
   @override
   _$CalculatorStateCopyWith<_CalculatorState> get copyWith =>
       __$CalculatorStateCopyWithImpl<_CalculatorState>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_CalculatorStateToJson(this);
+  }
 }
 
 abstract class _CalculatorState extends CalculatorState {
   const _CalculatorState._() : super._();
   const factory _CalculatorState(
       {bool showingDetail,
-      int atkBase,
-      int atkIndividual,
-      int atkEffort,
-      double atkNature,
-      int atkActual,
-      int defBase,
-      int defIndividual,
-      int defEffort,
-      double defNature,
-      int defActual,
+      StatusParams atk,
+      StatusParams def,
       int power,
       int maxDamage,
       int minDamage,
@@ -606,33 +429,17 @@ abstract class _CalculatorState extends CalculatorState {
       List<DamageScaleFactor> defScaleFactorList,
       DamageScaleFactor atkRank,
       DamageScaleFactor defRank,
-      int hpBase,
-      int hpIndividual,
-      int hpEffort,
-      int hpActual}) = _$_CalculatorState;
+      StatusParams hp}) = _$_CalculatorState;
+
+  factory _CalculatorState.fromJson(Map<String, dynamic> json) =
+      _$_CalculatorState.fromJson;
 
   @override
   bool get showingDetail;
   @override
-  int get atkBase;
+  StatusParams get atk;
   @override
-  int get atkIndividual;
-  @override
-  int get atkEffort;
-  @override
-  double get atkNature;
-  @override
-  int get atkActual;
-  @override
-  int get defBase;
-  @override
-  int get defIndividual;
-  @override
-  int get defEffort;
-  @override
-  double get defNature;
-  @override
-  int get defActual;
+  StatusParams get def;
   @override
   int get power;
   @override
@@ -648,16 +455,250 @@ abstract class _CalculatorState extends CalculatorState {
   @override
   DamageScaleFactor get defRank;
   @override
-  int get hpBase;
-  @override
-  int get hpIndividual;
-  @override
-  int get hpEffort;
-  @override
-  int get hpActual;
+  StatusParams get hp;
   @override
   @JsonKey(ignore: true)
   _$CalculatorStateCopyWith<_CalculatorState> get copyWith;
+}
+
+StatusParams _$StatusParamsFromJson(Map<String, dynamic> json) {
+  return _StatusParams.fromJson(json);
+}
+
+/// @nodoc
+class _$StatusParamsTearOff {
+  const _$StatusParamsTearOff();
+
+// ignore: unused_element
+  _StatusParams call(
+      {int base = 100,
+      int individual = 31,
+      int effort = 0,
+      double nature = 1.0,
+      int actual = 0}) {
+    return _StatusParams(
+      base: base,
+      individual: individual,
+      effort: effort,
+      nature: nature,
+      actual: actual,
+    );
+  }
+
+// ignore: unused_element
+  StatusParams fromJson(Map<String, Object> json) {
+    return StatusParams.fromJson(json);
+  }
+}
+
+/// @nodoc
+// ignore: unused_element
+const $StatusParams = _$StatusParamsTearOff();
+
+/// @nodoc
+mixin _$StatusParams {
+  int get base;
+  int get individual;
+  int get effort;
+  double get nature;
+  int get actual;
+
+  Map<String, dynamic> toJson();
+  @JsonKey(ignore: true)
+  $StatusParamsCopyWith<StatusParams> get copyWith;
+}
+
+/// @nodoc
+abstract class $StatusParamsCopyWith<$Res> {
+  factory $StatusParamsCopyWith(
+          StatusParams value, $Res Function(StatusParams) then) =
+      _$StatusParamsCopyWithImpl<$Res>;
+  $Res call({int base, int individual, int effort, double nature, int actual});
+}
+
+/// @nodoc
+class _$StatusParamsCopyWithImpl<$Res> implements $StatusParamsCopyWith<$Res> {
+  _$StatusParamsCopyWithImpl(this._value, this._then);
+
+  final StatusParams _value;
+  // ignore: unused_field
+  final $Res Function(StatusParams) _then;
+
+  @override
+  $Res call({
+    Object base = freezed,
+    Object individual = freezed,
+    Object effort = freezed,
+    Object nature = freezed,
+    Object actual = freezed,
+  }) {
+    return _then(_value.copyWith(
+      base: base == freezed ? _value.base : base as int,
+      individual: individual == freezed ? _value.individual : individual as int,
+      effort: effort == freezed ? _value.effort : effort as int,
+      nature: nature == freezed ? _value.nature : nature as double,
+      actual: actual == freezed ? _value.actual : actual as int,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$StatusParamsCopyWith<$Res>
+    implements $StatusParamsCopyWith<$Res> {
+  factory _$StatusParamsCopyWith(
+          _StatusParams value, $Res Function(_StatusParams) then) =
+      __$StatusParamsCopyWithImpl<$Res>;
+  @override
+  $Res call({int base, int individual, int effort, double nature, int actual});
+}
+
+/// @nodoc
+class __$StatusParamsCopyWithImpl<$Res> extends _$StatusParamsCopyWithImpl<$Res>
+    implements _$StatusParamsCopyWith<$Res> {
+  __$StatusParamsCopyWithImpl(
+      _StatusParams _value, $Res Function(_StatusParams) _then)
+      : super(_value, (v) => _then(v as _StatusParams));
+
+  @override
+  _StatusParams get _value => super._value as _StatusParams;
+
+  @override
+  $Res call({
+    Object base = freezed,
+    Object individual = freezed,
+    Object effort = freezed,
+    Object nature = freezed,
+    Object actual = freezed,
+  }) {
+    return _then(_StatusParams(
+      base: base == freezed ? _value.base : base as int,
+      individual: individual == freezed ? _value.individual : individual as int,
+      effort: effort == freezed ? _value.effort : effort as int,
+      nature: nature == freezed ? _value.nature : nature as double,
+      actual: actual == freezed ? _value.actual : actual as int,
+    ));
+  }
+}
+
+@JsonSerializable()
+
+/// @nodoc
+class _$_StatusParams extends _StatusParams with DiagnosticableTreeMixin {
+  const _$_StatusParams(
+      {this.base = 100,
+      this.individual = 31,
+      this.effort = 0,
+      this.nature = 1.0,
+      this.actual = 0})
+      : assert(base != null),
+        assert(individual != null),
+        assert(effort != null),
+        assert(nature != null),
+        assert(actual != null),
+        super._();
+
+  factory _$_StatusParams.fromJson(Map<String, dynamic> json) =>
+      _$_$_StatusParamsFromJson(json);
+
+  @JsonKey(defaultValue: 100)
+  @override
+  final int base;
+  @JsonKey(defaultValue: 31)
+  @override
+  final int individual;
+  @JsonKey(defaultValue: 0)
+  @override
+  final int effort;
+  @JsonKey(defaultValue: 1.0)
+  @override
+  final double nature;
+  @JsonKey(defaultValue: 0)
+  @override
+  final int actual;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'StatusParams(base: $base, individual: $individual, effort: $effort, nature: $nature, actual: $actual)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'StatusParams'))
+      ..add(DiagnosticsProperty('base', base))
+      ..add(DiagnosticsProperty('individual', individual))
+      ..add(DiagnosticsProperty('effort', effort))
+      ..add(DiagnosticsProperty('nature', nature))
+      ..add(DiagnosticsProperty('actual', actual));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _StatusParams &&
+            (identical(other.base, base) ||
+                const DeepCollectionEquality().equals(other.base, base)) &&
+            (identical(other.individual, individual) ||
+                const DeepCollectionEquality()
+                    .equals(other.individual, individual)) &&
+            (identical(other.effort, effort) ||
+                const DeepCollectionEquality().equals(other.effort, effort)) &&
+            (identical(other.nature, nature) ||
+                const DeepCollectionEquality().equals(other.nature, nature)) &&
+            (identical(other.actual, actual) ||
+                const DeepCollectionEquality().equals(other.actual, actual)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(base) ^
+      const DeepCollectionEquality().hash(individual) ^
+      const DeepCollectionEquality().hash(effort) ^
+      const DeepCollectionEquality().hash(nature) ^
+      const DeepCollectionEquality().hash(actual);
+
+  @JsonKey(ignore: true)
+  @override
+  _$StatusParamsCopyWith<_StatusParams> get copyWith =>
+      __$StatusParamsCopyWithImpl<_StatusParams>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_StatusParamsToJson(this);
+  }
+}
+
+abstract class _StatusParams extends StatusParams {
+  const _StatusParams._() : super._();
+  const factory _StatusParams(
+      {int base,
+      int individual,
+      int effort,
+      double nature,
+      int actual}) = _$_StatusParams;
+
+  factory _StatusParams.fromJson(Map<String, dynamic> json) =
+      _$_StatusParams.fromJson;
+
+  @override
+  int get base;
+  @override
+  int get individual;
+  @override
+  int get effort;
+  @override
+  double get nature;
+  @override
+  int get actual;
+  @override
+  @JsonKey(ignore: true)
+  _$StatusParamsCopyWith<_StatusParams> get copyWith;
+}
+
+DamageScaleFactor _$DamageScaleFactorFromJson(Map<String, dynamic> json) {
+  return _DamageScaleFactor.fromJson(json);
 }
 
 /// @nodoc
@@ -673,6 +714,11 @@ class _$DamageScaleFactorTearOff {
       isEnabled: isEnabled,
     );
   }
+
+// ignore: unused_element
+  DamageScaleFactor fromJson(Map<String, Object> json) {
+    return DamageScaleFactor.fromJson(json);
+  }
 }
 
 /// @nodoc
@@ -685,6 +731,7 @@ mixin _$DamageScaleFactor {
   double get scaleFactor;
   bool get isEnabled;
 
+  Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
   $DamageScaleFactorCopyWith<DamageScaleFactor> get copyWith;
 }
@@ -756,6 +803,8 @@ class __$DamageScaleFactorCopyWithImpl<$Res>
   }
 }
 
+@JsonSerializable()
+
 /// @nodoc
 class _$_DamageScaleFactor
     with DiagnosticableTreeMixin
@@ -765,6 +814,9 @@ class _$_DamageScaleFactor
       : assert(label != null),
         assert(scaleFactor != null),
         assert(isEnabled != null);
+
+  factory _$_DamageScaleFactor.fromJson(Map<String, dynamic> json) =>
+      _$_$_DamageScaleFactorFromJson(json);
 
   @override
   final String label;
@@ -814,11 +866,19 @@ class _$_DamageScaleFactor
   @override
   _$DamageScaleFactorCopyWith<_DamageScaleFactor> get copyWith =>
       __$DamageScaleFactorCopyWithImpl<_DamageScaleFactor>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_DamageScaleFactorToJson(this);
+  }
 }
 
 abstract class _DamageScaleFactor implements DamageScaleFactor {
   const factory _DamageScaleFactor(String label, double scaleFactor,
       {bool isEnabled}) = _$_DamageScaleFactor;
+
+  factory _DamageScaleFactor.fromJson(Map<String, dynamic> json) =
+      _$_DamageScaleFactor.fromJson;
 
   @override
   String get label;

@@ -5,6 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
 part 'calculator_controller.freezed.dart';
+part 'calculator_controller.g.dart';
 
 @freezed
 abstract class CalculatorState with _$CalculatorState {
@@ -13,16 +14,8 @@ abstract class CalculatorState with _$CalculatorState {
 
   const factory CalculatorState({
     @Default(true) bool showingDetail,
-    @Default(100) int atkBase,
-    @Default(31) int atkIndividual,
-    @Default(0) int atkEffort,
-    @Default(1.0) double atkNature,
-    @Default(0) int atkActual,
-    @Default(100) int defBase,
-    @Default(31) int defIndividual,
-    @Default(0) int defEffort,
-    @Default(1.0) double defNature,
-    @Default(0) int defActual,
+    StatusParams atk,
+    StatusParams def,
     @Default(100) int power,
     @Default(0) int maxDamage,
     @Default(0) int minDamage,
@@ -30,10 +23,7 @@ abstract class CalculatorState with _$CalculatorState {
     @Default([]) List<DamageScaleFactor> defScaleFactorList,
     DamageScaleFactor atkRank,
     DamageScaleFactor defRank,
-    @Default(100) int hpBase,
-    @Default(31) int hpIndividual,
-    @Default(0) int hpEffort,
-    @Default(0) int hpActual,
+    StatusParams hp,
   }) = _CalculatorState;
 
   double get totalAtkScaleFactor => atkScaleFactorList
@@ -45,6 +35,39 @@ abstract class CalculatorState with _$CalculatorState {
       .where((element) => element.isEnabled)
       .map<double>((element) => element.scaleFactor)
       .fold(1.0, (total, scaleFactor) => total * scaleFactor);
+
+  factory CalculatorState.fromJson(Map<String, dynamic> json) =>
+      _$CalculatorStateFromJson(json);
+}
+
+@freezed
+abstract class StatusParams with _$StatusParams {
+  // ignore: unused_element
+  const StatusParams._();
+
+  const factory StatusParams({
+    @Default(100) int base,
+    @Default(31) int individual,
+    @Default(0) int effort,
+    @Default(1.0) double nature,
+    @Default(0) int actual,
+  }) = _StatusParams;
+
+  factory StatusParams.fromJson(Map<String, dynamic> json) =>
+      _$StatusParamsFromJson(json);
+
+  int get actualStatus => Calculator.toActualStatus(
+        base,
+        effort: effort,
+        individual: individual,
+        nature: nature,
+      );
+
+  int get actualHp => Calculator.toActualHp(
+        base,
+        effort: effort,
+        individual: individual,
+      );
 }
 
 @freezed
@@ -54,6 +77,9 @@ abstract class DamageScaleFactor with _$DamageScaleFactor {
     double scaleFactor, {
     @Default(false) bool isEnabled,
   }) = _DamageScaleFactor;
+
+  factory DamageScaleFactor.fromJson(Map<String, dynamic> json) =>
+      _$DamageScaleFactorFromJson(json);
 }
 
 class CalculatorController extends StateNotifier<CalculatorState> {
@@ -82,6 +108,9 @@ class CalculatorController extends StateNotifier<CalculatorState> {
 
   void init() {
     state = state.copyWith(
+      atk: const StatusParams(),
+      def: const StatusParams(),
+      hp: const StatusParams(),
       atkRank: rankList[6],
       defRank: rankList[6],
       atkScaleFactorList: <DamageScaleFactor>[
@@ -128,43 +157,26 @@ class CalculatorController extends StateNotifier<CalculatorState> {
     int defActual,
   }) {
     state = state.copyWith(
-      atkBase: atkBase ?? state.atkBase,
-      atkIndividual: atkIndividual ?? state.atkIndividual,
-      atkEffort: atkEffort ?? state.atkEffort,
-      atkNature: atkNature ?? state.atkNature,
-      defBase: defBase ?? state.defBase,
-      defIndividual: defIndividual ?? state.defIndividual,
-      defEffort: defEffort ?? state.defEffort,
-      defNature: defNature ?? state.defNature,
-    );
-
-    final calculatedAtkActual = atkActual ??
-        Calculator.toActualStatus(
-          state.atkBase,
-          individual: state.atkIndividual,
-          effort: state.atkEffort,
-          nature: state.atkNature,
-        );
-
-    final calculatedDefActual = defActual ??
-        Calculator.toActualStatus(
-          state.defBase,
-          individual: state.defIndividual,
-          effort: state.defEffort,
-          nature: state.defNature,
-        );
-
-    state = state.copyWith(
-      atkActual: calculatedAtkActual,
-      defActual: calculatedDefActual,
+      atk: state.atk.copyWith(
+        base: atkBase ?? state.atk.base,
+        individual: atkIndividual ?? state.atk.individual,
+        effort: atkEffort ?? state.atk.effort,
+        nature: atkNature ?? state.atk.nature,
+      ),
+      def: state.def.copyWith(
+        base: defBase ?? state.def.base,
+        individual: defIndividual ?? state.def.individual,
+        effort: defEffort ?? state.def.effort,
+        nature: defNature ?? state.def.nature,
+      ),
     );
 
     if (atkActual == null) {
-      atkActualController.text = state.atkActual.toString();
+      atkActualController.text = state.atk.actual.toString();
     }
 
     if (defActual == null) {
-      defActualController.text = state.defActual.toString();
+      defActualController.text = state.def.actual.toString();
     }
 
     updateDamage();
@@ -209,8 +221,8 @@ class CalculatorController extends StateNotifier<CalculatorState> {
 
   void updateDamage({int power}) {
     final damages = Calculator.toDamage(
-      (state.atkActual * state.atkRank.scaleFactor).toInt(),
-      (state.defActual * state.totalDefScaleFactor * state.defRank.scaleFactor)
+      (state.atk.actual * state.atkRank.scaleFactor).toInt(),
+      (state.def.actual * state.totalDefScaleFactor * state.defRank.scaleFactor)
           .toInt(),
       power ?? state.power,
       scaleFactor: state.totalAtkScaleFactor,
@@ -228,16 +240,10 @@ class CalculatorController extends StateNotifier<CalculatorState> {
     int hpEffort,
   }) {
     state = state.copyWith(
-      hpBase: hpBase ?? state.hpBase,
-      hpIndividual: hpIndividual ?? state.hpIndividual,
-      hpEffort: hpEffort ?? state.hpEffort,
-    );
-
-    state = state.copyWith(
-      hpActual: Calculator.toActualHp(
-        state.hpBase,
-        individual: state.hpIndividual,
-        effort: state.hpEffort,
+      hp: state.hp.copyWith(
+        base: hpBase ?? state.hp.base,
+        individual: hpIndividual ?? state.hp.individual,
+        effort: hpEffort ?? state.hp.effort,
       ),
     );
   }
