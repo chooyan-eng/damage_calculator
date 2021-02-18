@@ -22,57 +22,54 @@ class CalculatorPage extends ConsumerWidget {
             child: GestureDetector(
               behavior: HitTestBehavior.translucent,
               onPanDown: (_) => FocusScope.of(context).unfocus(),
-              child: SizedBox(
-                child: Column(
-                  children: [
-                    const SizedBox(height: 16),
-                    Center(
-                      child: Text(
-                        '${state.minDamage} - ${state.maxDamage}',
-                        style: TextStyle(
-                          fontSize: 40,
-                          color: Colors.blue,
-                        ),
+              child: Column(
+                children: [
+                  const SizedBox(height: 16),
+                  Center(
+                    child: Text(
+                      '${state.minDamage} - ${state.maxDamage}',
+                      style: TextStyle(
+                        fontSize: 40,
+                        color: Colors.blue,
                       ),
                     ),
-                    const SizedBox(height: 16),
-                    Divider(height: 1),
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: OutlinedButton(
-                                onPressed: () =>
-                                    controller.toggleShowingDetail(),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(
-                                      '実数値計算機を${state.showingDetail ? "隠す" : "表示"}',
-                                    ),
-                                    const SizedBox(width: 8),
-                                    Icon(
-                                      state.showingDetail
-                                          ? Icons.keyboard_arrow_down
-                                          : Icons.keyboard_arrow_right,
-                                    ),
-                                  ],
-                                ),
+                  ),
+                  const SizedBox(height: 16),
+                  Divider(height: 1),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: OutlinedButton(
+                              onPressed: () => controller.toggleShowingDetail(),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    '実数値計算機を${state.showingDetail ? "隠す" : "表示"}',
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Icon(
+                                    state.showingDetail
+                                        ? Icons.keyboard_arrow_down
+                                        : Icons.keyboard_arrow_right,
+                                  ),
+                                ],
                               ),
                             ),
-                            if (state.showingDetail)
-                              _buildActualCalculator(state, controller),
-                            _buildConcreteValueArea(controller, state),
-                            const SizedBox(height: 240),
-                          ],
-                        ),
+                          ),
+                          if (state.showingDetail)
+                            _buildActualCalculator(state, controller),
+                          _buildConcreteValueArea(controller, state),
+                          const SizedBox(height: 240),
+                        ],
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -130,7 +127,7 @@ class CalculatorPage extends ConsumerWidget {
                         children: [
                           Center(
                             child: Text(
-                              '${state.hp.actual}',
+                              '${state.hp.actualHp}',
                               style: TextStyle(
                                 fontSize: 40,
                                 color: Colors.blue,
@@ -147,7 +144,7 @@ class CalculatorPage extends ConsumerWidget {
                                         Text('1 / $ratio',
                                             style: TextStyles.label),
                                         const SizedBox(height: 8),
-                                        Text('${state.hp.actual ~/ ratio}',
+                                        Text('${state.hp.actualHp ~/ ratio}',
                                             style: TextStyles.damage),
                                       ],
                                     ),
@@ -234,7 +231,7 @@ class CalculatorPage extends ConsumerWidget {
                   controller: controller.atkActualController,
                   onChanged: (value) => controller.updateStatus(
                     atkActual: value,
-                    defActual: state.def.actual,
+                    defActual: state.def.actualHp,
                   ),
                 ),
               ),
@@ -243,7 +240,7 @@ class CalculatorPage extends ConsumerWidget {
                 child: ValueInput(
                   controller: controller.defActualController,
                   onChanged: (value) => controller.updateStatus(
-                      defActual: value, atkActual: state.atk.actual),
+                      defActual: value, atkActual: state.atk.actualHp),
                 ),
               ),
             ],
@@ -374,15 +371,16 @@ class CalculatorPage extends ConsumerWidget {
                         controller.updateRank(defRank: newValue),
                     items: CalculatorController.rankList
                         .map<DropdownMenuItem<DamageScaleFactor>>(
-                            (DamageScaleFactor value) {
-                      return DropdownMenuItem<DamageScaleFactor>(
-                        value: value,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 32),
-                          child: Text(value.label),
-                        ),
-                      );
-                    }).toList(),
+                      (DamageScaleFactor value) {
+                        return DropdownMenuItem<DamageScaleFactor>(
+                          value: value,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 32),
+                            child: Text(value.label),
+                          ),
+                        );
+                      },
+                    ).toList(),
                   ),
                 ),
               ),
@@ -400,111 +398,118 @@ class CalculatorPage extends ConsumerWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       color: Colors.green.shade50,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
         children: [
-          Text('種族値', style: TextStyles.label),
-          Row(
-            children: [
-              Expanded(
-                child: StatusInput(
-                  value: state.atk.base,
-                  onChanged: (value) => controller.updateStatus(atkBase: value),
-                ),
-              ),
-              const SizedBox(width: 32),
-              Expanded(
-                child: StatusInput(
-                  value: state.def.base,
-                  onChanged: (value) => controller.updateStatus(defBase: value),
-                ),
-              ),
-            ],
+          Expanded(
+            child: _VerticalStatusInput(
+              baseLabel: '種族値',
+              individualLabel: '個体値',
+              effortLabel: '努力値',
+              natureLabel: '性格補正',
+              baseValue: state.atk.base,
+              individualValue: state.atk.individual,
+              effortValue: state.atk.effort,
+              natureValue: state.atk.nature,
+              onBaseChange: (value) => controller.updateStatus(atkBase: value),
+              onIndividualChange: (value) =>
+                  controller.updateStatus(atkIndividual: value),
+              onEffortChange: (value) =>
+                  controller.updateStatus(atkEffort: value),
+              onNatureChange: (value) =>
+                  controller.updateStatus(atkNature: value),
+            ),
           ),
-          const SizedBox(height: 40),
-          Text('個体値', style: TextStyles.label),
-          Row(
-            children: [
-              Expanded(
-                child: StatusInput(
-                  value: state.atk.individual,
-                  onChanged: (value) =>
-                      controller.updateStatus(atkIndividual: value),
-                ),
-              ),
-              const SizedBox(width: 32),
-              Expanded(
-                child: StatusInput(
-                  value: state.def.individual,
-                  onChanged: (value) =>
-                      controller.updateStatus(defIndividual: value),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 40),
-          Text('努力値', style: TextStyles.label),
-          Row(
-            children: [
-              Expanded(
-                child: StatusInput(
-                  selections: [0, 4, 252],
-                  value: state.atk.effort,
-                  onChanged: (value) =>
-                      controller.updateStatus(atkEffort: value),
-                ),
-              ),
-              const SizedBox(width: 32),
-              Expanded(
-                child: StatusInput(
-                  selections: [0, 4, 252],
-                  value: state.def.effort,
-                  onChanged: (value) =>
-                      controller.updateStatus(defEffort: value),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 40),
-          Text('性格補正', style: TextStyles.label),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              Expanded(
-                child: Center(
-                  child: ToggleButtons(
-                    isSelected: CalculatorController.natureValues
-                        .map((value) => value == state.atk.nature)
-                        .toList(),
-                    onPressed: (value) => controller.updateStatus(
-                        atkNature: CalculatorController.natureValues[value]),
-                    children:
-                        CalculatorController.natureValues.map<Widget>((value) {
-                      return Text('$value');
-                    }).toList(),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 32),
-              Expanded(
-                child: Center(
-                  child: ToggleButtons(
-                    isSelected: CalculatorController.natureValues
-                        .map((value) => value == state.def.nature)
-                        .toList(),
-                    onPressed: (value) => controller.updateStatus(
-                        defNature: CalculatorController.natureValues[value]),
-                    children:
-                        CalculatorController.natureValues.map<Widget>((value) {
-                      return Text('$value');
-                    }).toList(),
-                  ),
-                ),
-              ),
-            ],
+          const SizedBox(width: 32),
+          Expanded(
+            child: _VerticalStatusInput(
+              baseValue: state.def.base,
+              individualValue: state.def.individual,
+              effortValue: state.def.effort,
+              natureValue: state.def.nature,
+              onBaseChange: (value) => controller.updateStatus(defBase: value),
+              onIndividualChange: (value) =>
+                  controller.updateStatus(defIndividual: value),
+              onEffortChange: (value) =>
+                  controller.updateStatus(defEffort: value),
+              onNatureChange: (value) =>
+                  controller.updateStatus(defNature: value),
+            ),
           ),
         ],
       ),
+    );
+  }
+}
+
+class _VerticalStatusInput extends StatelessWidget {
+  final String baseLabel;
+  final String individualLabel;
+  final String effortLabel;
+  final String natureLabel;
+  final int baseValue;
+  final int individualValue;
+  final int effortValue;
+  final double natureValue;
+  final ValueChanged<int> onBaseChange;
+  final ValueChanged<int> onIndividualChange;
+  final ValueChanged<int> onEffortChange;
+  final ValueChanged<double> onNatureChange;
+
+  const _VerticalStatusInput({
+    Key key,
+    this.baseLabel = '',
+    this.individualLabel = '',
+    this.effortLabel = '',
+    this.natureLabel = '',
+    this.baseValue,
+    this.individualValue,
+    this.effortValue,
+    this.natureValue,
+    this.onBaseChange,
+    this.onIndividualChange,
+    this.onEffortChange,
+    this.onNatureChange,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(baseLabel, style: TextStyles.label),
+        StatusInput(
+          value: baseValue,
+          onChanged: onBaseChange,
+        ),
+        const SizedBox(height: 40),
+        Text(individualLabel, style: TextStyles.label),
+        StatusInput(
+          value: individualValue,
+          onChanged: onIndividualChange,
+        ),
+        const SizedBox(height: 40),
+        Text(effortLabel, style: TextStyles.label),
+        StatusInput(
+          selections: [0, 4, 252],
+          value: effortValue,
+          onChanged: onEffortChange,
+        ),
+        const SizedBox(height: 40),
+        Text(natureLabel, style: TextStyles.label),
+        const SizedBox(height: 8),
+        Center(
+          child: ToggleButtons(
+            isSelected: CalculatorController.natureValues
+                .map((value) => value == natureValue)
+                .toList(),
+            onPressed: (index) =>
+                onNatureChange(CalculatorController.natureValues[index]),
+            children: CalculatorController.natureValues
+                .map<Widget>((value) => Text('$value'))
+                .toList(),
+          ),
+        ),
+      ],
     );
   }
 }

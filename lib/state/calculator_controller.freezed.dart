@@ -474,14 +474,12 @@ class _$StatusParamsTearOff {
       {int base = 100,
       int individual = 31,
       int effort = 0,
-      double nature = 1.0,
-      int actual = 0}) {
+      double nature = 1.0}) {
     return _StatusParams(
       base: base,
       individual: individual,
       effort: effort,
       nature: nature,
-      actual: actual,
     );
   }
 
@@ -501,7 +499,6 @@ mixin _$StatusParams {
   int get individual;
   int get effort;
   double get nature;
-  int get actual;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -513,7 +510,7 @@ abstract class $StatusParamsCopyWith<$Res> {
   factory $StatusParamsCopyWith(
           StatusParams value, $Res Function(StatusParams) then) =
       _$StatusParamsCopyWithImpl<$Res>;
-  $Res call({int base, int individual, int effort, double nature, int actual});
+  $Res call({int base, int individual, int effort, double nature});
 }
 
 /// @nodoc
@@ -530,14 +527,12 @@ class _$StatusParamsCopyWithImpl<$Res> implements $StatusParamsCopyWith<$Res> {
     Object individual = freezed,
     Object effort = freezed,
     Object nature = freezed,
-    Object actual = freezed,
   }) {
     return _then(_value.copyWith(
       base: base == freezed ? _value.base : base as int,
       individual: individual == freezed ? _value.individual : individual as int,
       effort: effort == freezed ? _value.effort : effort as int,
       nature: nature == freezed ? _value.nature : nature as double,
-      actual: actual == freezed ? _value.actual : actual as int,
     ));
   }
 }
@@ -549,7 +544,7 @@ abstract class _$StatusParamsCopyWith<$Res>
           _StatusParams value, $Res Function(_StatusParams) then) =
       __$StatusParamsCopyWithImpl<$Res>;
   @override
-  $Res call({int base, int individual, int effort, double nature, int actual});
+  $Res call({int base, int individual, int effort, double nature});
 }
 
 /// @nodoc
@@ -568,14 +563,12 @@ class __$StatusParamsCopyWithImpl<$Res> extends _$StatusParamsCopyWithImpl<$Res>
     Object individual = freezed,
     Object effort = freezed,
     Object nature = freezed,
-    Object actual = freezed,
   }) {
     return _then(_StatusParams(
       base: base == freezed ? _value.base : base as int,
       individual: individual == freezed ? _value.individual : individual as int,
       effort: effort == freezed ? _value.effort : effort as int,
       nature: nature == freezed ? _value.nature : nature as double,
-      actual: actual == freezed ? _value.actual : actual as int,
     ));
   }
 }
@@ -588,13 +581,11 @@ class _$_StatusParams extends _StatusParams with DiagnosticableTreeMixin {
       {this.base = 100,
       this.individual = 31,
       this.effort = 0,
-      this.nature = 1.0,
-      this.actual = 0})
+      this.nature = 1.0})
       : assert(base != null),
         assert(individual != null),
         assert(effort != null),
         assert(nature != null),
-        assert(actual != null),
         super._();
 
   factory _$_StatusParams.fromJson(Map<String, dynamic> json) =>
@@ -612,13 +603,10 @@ class _$_StatusParams extends _StatusParams with DiagnosticableTreeMixin {
   @JsonKey(defaultValue: 1.0)
   @override
   final double nature;
-  @JsonKey(defaultValue: 0)
-  @override
-  final int actual;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'StatusParams(base: $base, individual: $individual, effort: $effort, nature: $nature, actual: $actual)';
+    return 'StatusParams(base: $base, individual: $individual, effort: $effort, nature: $nature)';
   }
 
   @override
@@ -629,8 +617,7 @@ class _$_StatusParams extends _StatusParams with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('base', base))
       ..add(DiagnosticsProperty('individual', individual))
       ..add(DiagnosticsProperty('effort', effort))
-      ..add(DiagnosticsProperty('nature', nature))
-      ..add(DiagnosticsProperty('actual', actual));
+      ..add(DiagnosticsProperty('nature', nature));
   }
 
   @override
@@ -645,9 +632,7 @@ class _$_StatusParams extends _StatusParams with DiagnosticableTreeMixin {
             (identical(other.effort, effort) ||
                 const DeepCollectionEquality().equals(other.effort, effort)) &&
             (identical(other.nature, nature) ||
-                const DeepCollectionEquality().equals(other.nature, nature)) &&
-            (identical(other.actual, actual) ||
-                const DeepCollectionEquality().equals(other.actual, actual)));
+                const DeepCollectionEquality().equals(other.nature, nature)));
   }
 
   @override
@@ -656,8 +641,7 @@ class _$_StatusParams extends _StatusParams with DiagnosticableTreeMixin {
       const DeepCollectionEquality().hash(base) ^
       const DeepCollectionEquality().hash(individual) ^
       const DeepCollectionEquality().hash(effort) ^
-      const DeepCollectionEquality().hash(nature) ^
-      const DeepCollectionEquality().hash(actual);
+      const DeepCollectionEquality().hash(nature);
 
   @JsonKey(ignore: true)
   @override
@@ -673,11 +657,7 @@ class _$_StatusParams extends _StatusParams with DiagnosticableTreeMixin {
 abstract class _StatusParams extends StatusParams {
   const _StatusParams._() : super._();
   const factory _StatusParams(
-      {int base,
-      int individual,
-      int effort,
-      double nature,
-      int actual}) = _$_StatusParams;
+      {int base, int individual, int effort, double nature}) = _$_StatusParams;
 
   factory _StatusParams.fromJson(Map<String, dynamic> json) =
       _$_StatusParams.fromJson;
@@ -690,8 +670,6 @@ abstract class _StatusParams extends StatusParams {
   int get effort;
   @override
   double get nature;
-  @override
-  int get actual;
   @override
   @JsonKey(ignore: true)
   _$StatusParamsCopyWith<_StatusParams> get copyWith;

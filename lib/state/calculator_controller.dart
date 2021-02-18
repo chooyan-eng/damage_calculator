@@ -50,7 +50,6 @@ abstract class StatusParams with _$StatusParams {
     @Default(31) int individual,
     @Default(0) int effort,
     @Default(1.0) double nature,
-    @Default(0) int actual,
   }) = _StatusParams;
 
   factory StatusParams.fromJson(Map<String, dynamic> json) =>
@@ -119,8 +118,11 @@ class CalculatorController extends StateNotifier<CalculatorState> {
         const DamageScaleFactor('4倍弱点', 4.0),
         const DamageScaleFactor('拘り', 1.5),
         const DamageScaleFactor('玉', 1.3),
+        const DamageScaleFactor('天候', 1.5),
+        const DamageScaleFactor('フィールド', 1.3),
         const DamageScaleFactor('1.1', 1.1),
         const DamageScaleFactor('1.2', 1.2),
+        const DamageScaleFactor('1.3', 1.2),
         const DamageScaleFactor('1.5', 1.5),
         const DamageScaleFactor('2.0', 2.0),
       ],
@@ -129,6 +131,9 @@ class CalculatorController extends StateNotifier<CalculatorState> {
         const DamageScaleFactor('1/4耐性', 4),
         const DamageScaleFactor('チョッキ', 1.5),
         const DamageScaleFactor('きせき', 1.5),
+        const DamageScaleFactor('壁', 2),
+        const DamageScaleFactor('天候', 2),
+        const DamageScaleFactor('フィールド', 2),
         const DamageScaleFactor('2 / 3', 1.5),
         const DamageScaleFactor('1 / 2', 2),
       ],
@@ -139,9 +144,7 @@ class CalculatorController extends StateNotifier<CalculatorState> {
   }
 
   void toggleShowingDetail() {
-    state = state.copyWith(
-      showingDetail: !state.showingDetail,
-    );
+    state = state.copyWith(showingDetail: !state.showingDetail);
   }
 
   void updateStatus({
@@ -172,11 +175,11 @@ class CalculatorController extends StateNotifier<CalculatorState> {
     );
 
     if (atkActual == null) {
-      atkActualController.text = state.atk.actual.toString();
+      atkActualController.text = state.atk.actualStatus.toString();
     }
 
     if (defActual == null) {
-      defActualController.text = state.def.actual.toString();
+      defActualController.text = state.def.actualStatus.toString();
     }
 
     updateDamage();
@@ -221,8 +224,10 @@ class CalculatorController extends StateNotifier<CalculatorState> {
 
   void updateDamage({int power}) {
     final damages = Calculator.toDamage(
-      (state.atk.actual * state.atkRank.scaleFactor).toInt(),
-      (state.def.actual * state.totalDefScaleFactor * state.defRank.scaleFactor)
+      (state.atk.actualStatus * state.atkRank.scaleFactor).toInt(),
+      (state.def.actualStatus *
+              state.totalDefScaleFactor *
+              state.defRank.scaleFactor)
           .toInt(),
       power ?? state.power,
       scaleFactor: state.totalAtkScaleFactor,

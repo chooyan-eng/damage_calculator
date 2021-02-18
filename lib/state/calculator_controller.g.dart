@@ -65,7 +65,6 @@ _$_StatusParams _$_$_StatusParamsFromJson(Map<String, dynamic> json) {
     individual: json['individual'] as int ?? 31,
     effort: json['effort'] as int ?? 0,
     nature: (json['nature'] as num)?.toDouble() ?? 1.0,
-    actual: json['actual'] as int ?? 0,
   );
 }
 
@@ -75,7 +74,6 @@ Map<String, dynamic> _$_$_StatusParamsToJson(_$_StatusParams instance) =>
       'individual': instance.individual,
       'effort': instance.effort,
       'nature': instance.nature,
-      'actual': instance.actual,
     };
 
 _$_DamageScaleFactor _$_$_DamageScaleFactorFromJson(Map<String, dynamic> json) {
