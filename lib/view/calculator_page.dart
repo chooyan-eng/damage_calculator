@@ -43,49 +43,23 @@ class CalculatorPage extends ConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(height: 16),
-                                Text('名前', style: TextStyles.label),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: StringInput(
-                                        onChanged: (value) => controller
-                                            .updateStatus(atkName: value),
-                                      ),
-                                    ),
-                                    const SizedBox(width: 32),
-                                    Expanded(
-                                      child: StringInput(
-                                        onChanged: (value) => controller
-                                            .updateStatus(defName: value),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 16),
-                                OutlinedButton(
-                                  onPressed: () =>
-                                      controller.toggleShowingDetail(),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text(
-                                        '実数値計算機を${state.showingDetail ? "隠す" : "表示"}',
-                                      ),
-                                      const SizedBox(width: 8),
-                                      Icon(
-                                        state.showingDetail
-                                            ? Icons.keyboard_arrow_down
-                                            : Icons.keyboard_arrow_right,
-                                      ),
-                                    ],
+                            padding: const EdgeInsets.all(16),
+                            child: OutlinedButton(
+                              onPressed: () => controller.toggleShowingDetail(),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    '実数値計算機を${state.showingDetail ? "隠す" : "表示"}',
                                   ),
-                                ),
-                              ],
+                                  const SizedBox(width: 8),
+                                  Icon(
+                                    state.showingDetail
+                                        ? Icons.keyboard_arrow_down
+                                        : Icons.keyboard_arrow_right,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           if (state.showingDetail)

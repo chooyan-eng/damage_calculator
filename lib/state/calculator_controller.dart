@@ -117,7 +117,7 @@ class CalculatorController extends StateNotifier<CalculatorState> {
         const DamageScaleFactor('弱点', 2.0),
         const DamageScaleFactor('4倍弱点', 4.0),
         const DamageScaleFactor('拘り', 1.5),
-        const DamageScaleFactor('玉', 1.3),
+        const DamageScaleFactor('珠', 1.3),
         const DamageScaleFactor('天候', 1.5),
         const DamageScaleFactor('フィールド', 1.3),
         const DamageScaleFactor('1.1', 1.1),
