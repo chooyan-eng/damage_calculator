@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:damage_calculator/util/calculator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -35,6 +37,18 @@ abstract class CalculatorState with _$CalculatorState {
       .where((element) => element.isEnabled)
       .map<double>((element) => element.scaleFactor)
       .fold(1.0, (total, scaleFactor) => total * scaleFactor);
+
+  double get maxDamageRatio {
+    final damagedHp = hp.actualHp - maxDamage;
+    if (damagedHp <= 0) return 0;
+    return damagedHp / hp.actualHp;
+  }
+
+  double get minDamageRatio {
+    final damagedHp = hp.actualHp - minDamage;
+    if (damagedHp <= 0) return 0;
+    return damagedHp / hp.actualHp;
+  }
 
   factory CalculatorState.fromJson(Map<String, dynamic> json) =>
       _$CalculatorStateFromJson(json);

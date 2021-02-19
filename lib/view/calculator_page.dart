@@ -1,5 +1,4 @@
 import 'package:damage_calculator/state/calculator_controller.dart';
-import 'package:damage_calculator/view/widget/string_input.dart';
 import 'package:damage_calculator/view/widget/text_styles.dart';
 import 'package:damage_calculator/view/widget/status_input.dart';
 import 'package:damage_calculator/view/widget/value_input.dart';
@@ -105,15 +104,31 @@ class CalculatorPage extends ConsumerWidget {
                       topLeft: Radius.circular(8.0),
                       topRight: Radius.circular(8.0),
                     ),
-                    color: Colors.blue,
+                    border: Border.all(
+                      width: 4,
+                      color: Colors.blue,
+                    ),
+                    color: Colors.blue.shade50,
                   ),
                   height: 24,
                   width: MediaQuery.of(context).size.width,
-                  child: Center(
-                    child: Text(
-                      'H P',
-                      style: TextStyle(color: Colors.white),
-                    ),
+                  child: Stack(
+                    children: [
+                      _HpBar(
+                        color: Colors.blue.shade200,
+                        ratio: state.minDamageRatio,
+                      ),
+                      _HpBar(
+                        color: Colors.blue,
+                        ratio: state.maxDamageRatio,
+                      ),
+                      Center(
+                        child: Text(
+                          'H P',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 Expanded(
@@ -137,12 +152,12 @@ class CalculatorPage extends ConsumerWidget {
                           ),
                           const SizedBox(height: 16),
                           Row(
-                            children: [2, 4, 8, 10, 16, 32]
+                            children: [2, 3, 4, 6, 8, 10, 16, 32]
                                 .map<Widget>(
                                   (ratio) => Expanded(
                                     child: Column(
                                       children: [
-                                        Text('1 / $ratio',
+                                        Text('1/$ratio',
                                             style: TextStyles.label),
                                         const SizedBox(height: 8),
                                         Text('${state.hp.actualHp ~/ ratio}',
@@ -474,29 +489,43 @@ class _VerticalStatusInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // for fixing labels' height regardless of the label strings.
+    const labelHeight = 18.0;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(baseLabel, style: TextStyles.label),
+        SizedBox(
+          height: labelHeight,
+          child: Text(baseLabel, style: TextStyles.label),
+        ),
         StatusInput(
           value: baseValue,
           onChanged: onBaseChange,
         ),
         const SizedBox(height: 40),
-        Text(individualLabel, style: TextStyles.label),
+        SizedBox(
+          height: labelHeight,
+          child: Text(individualLabel, style: TextStyles.label),
+        ),
         StatusInput(
           value: individualValue,
           onChanged: onIndividualChange,
         ),
         const SizedBox(height: 40),
-        Text(effortLabel, style: TextStyles.label),
+        SizedBox(
+          height: labelHeight,
+          child: Text(effortLabel, style: TextStyles.label),
+        ),
         StatusInput(
           selections: [0, 4, 252],
           value: effortValue,
           onChanged: onEffortChange,
         ),
         const SizedBox(height: 40),
-        Text(natureLabel, style: TextStyles.label),
+        SizedBox(
+          height: labelHeight,
+          child: Text(natureLabel, style: TextStyles.label),
+        ),
         const SizedBox(height: 8),
         Center(
           child: ToggleButtons(
@@ -511,6 +540,27 @@ class _VerticalStatusInput extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _HpBar extends StatelessWidget {
+  final Color color;
+  final double ratio;
+
+  const _HpBar({
+    Key key,
+    this.color,
+    this.ratio,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 100),
+      height: 24,
+      width: MediaQuery.of(context).size.width * ratio,
+      color: color,
     );
   }
 }
