@@ -354,7 +354,7 @@ class CalculatorPage extends ConsumerWidget {
                       height: 2,
                       color: Colors.blue,
                     ),
-                    onChanged: (DamageScaleFactor newValue) =>
+                    onChanged: (DamageScaleFactor? newValue) =>
                         controller.updateRank(atkRank: newValue),
                     items: CalculatorController.rankList
                         .map<DropdownMenuItem<DamageScaleFactor>>(
@@ -383,7 +383,7 @@ class CalculatorPage extends ConsumerWidget {
                       height: 2,
                       color: Colors.blue,
                     ),
-                    onChanged: (DamageScaleFactor newValue) =>
+                    onChanged: (DamageScaleFactor? newValue) =>
                         controller.updateRank(defRank: newValue),
                     items: CalculatorController.rankList
                         .map<DropdownMenuItem<DamageScaleFactor>>(
@@ -472,19 +472,19 @@ class _VerticalStatusInput extends StatelessWidget {
   final ValueChanged<double> onNatureChange;
 
   const _VerticalStatusInput({
-    Key key,
+    Key? key,
     this.baseLabel = '',
     this.individualLabel = '',
     this.effortLabel = '',
     this.natureLabel = '',
-    this.baseValue,
-    this.individualValue,
-    this.effortValue,
-    this.natureValue,
-    this.onBaseChange,
-    this.onIndividualChange,
-    this.onEffortChange,
-    this.onNatureChange,
+    required this.baseValue,
+    required this.individualValue,
+    required this.effortValue,
+    required this.natureValue,
+    required this.onBaseChange,
+    required this.onIndividualChange,
+    required this.onEffortChange,
+    required this.onNatureChange,
   }) : super(key: key);
 
   @override
@@ -549,9 +549,9 @@ class _HpBar extends StatelessWidget {
   final double ratio;
 
   const _HpBar({
-    Key key,
-    this.color,
-    this.ratio,
+    Key? key,
+    required this.color,
+    required this.ratio,
   }) : super(key: key);
 
   @override

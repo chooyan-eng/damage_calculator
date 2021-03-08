@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'calculator_controller.dart';
 
@@ -8,6 +8,10 @@ part of 'calculator_controller.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 CalculatorState _$CalculatorStateFromJson(Map<String, dynamic> json) {
   return _CalculatorState.fromJson(json);
 }
@@ -16,19 +20,18 @@ CalculatorState _$CalculatorStateFromJson(Map<String, dynamic> json) {
 class _$CalculatorStateTearOff {
   const _$CalculatorStateTearOff();
 
-// ignore: unused_element
   _CalculatorState call(
       {bool showingDetail = true,
-      StatusParams atk,
-      StatusParams def,
+      required StatusParams atk,
+      required StatusParams def,
       int power = 100,
       int maxDamage = 0,
       int minDamage = 0,
       List<DamageScaleFactor> atkScaleFactorList = const [],
       List<DamageScaleFactor> defScaleFactorList = const [],
-      DamageScaleFactor atkRank,
-      DamageScaleFactor defRank,
-      StatusParams hp}) {
+      required DamageScaleFactor atkRank,
+      required DamageScaleFactor defRank,
+      required StatusParams hp}) {
     return _CalculatorState(
       showingDetail: showingDetail,
       atk: atk,
@@ -44,33 +47,34 @@ class _$CalculatorStateTearOff {
     );
   }
 
-// ignore: unused_element
   CalculatorState fromJson(Map<String, Object> json) {
     return CalculatorState.fromJson(json);
   }
 }
 
 /// @nodoc
-// ignore: unused_element
 const $CalculatorState = _$CalculatorStateTearOff();
 
 /// @nodoc
 mixin _$CalculatorState {
-  bool get showingDetail;
-  StatusParams get atk;
-  StatusParams get def;
-  int get power;
-  int get maxDamage;
-  int get minDamage;
-  List<DamageScaleFactor> get atkScaleFactorList;
-  List<DamageScaleFactor> get defScaleFactorList;
-  DamageScaleFactor get atkRank;
-  DamageScaleFactor get defRank;
-  StatusParams get hp;
+  bool get showingDetail => throw _privateConstructorUsedError;
+  StatusParams get atk => throw _privateConstructorUsedError;
+  StatusParams get def => throw _privateConstructorUsedError;
+  int get power => throw _privateConstructorUsedError;
+  int get maxDamage => throw _privateConstructorUsedError;
+  int get minDamage => throw _privateConstructorUsedError;
+  List<DamageScaleFactor> get atkScaleFactorList =>
+      throw _privateConstructorUsedError;
+  List<DamageScaleFactor> get defScaleFactorList =>
+      throw _privateConstructorUsedError;
+  DamageScaleFactor get atkRank => throw _privateConstructorUsedError;
+  DamageScaleFactor get defRank => throw _privateConstructorUsedError;
+  StatusParams get hp => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $CalculatorStateCopyWith<CalculatorState> get copyWith;
+  $CalculatorStateCopyWith<CalculatorState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -109,46 +113,68 @@ class _$CalculatorStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object showingDetail = freezed,
-    Object atk = freezed,
-    Object def = freezed,
-    Object power = freezed,
-    Object maxDamage = freezed,
-    Object minDamage = freezed,
-    Object atkScaleFactorList = freezed,
-    Object defScaleFactorList = freezed,
-    Object atkRank = freezed,
-    Object defRank = freezed,
-    Object hp = freezed,
+    Object? showingDetail = freezed,
+    Object? atk = freezed,
+    Object? def = freezed,
+    Object? power = freezed,
+    Object? maxDamage = freezed,
+    Object? minDamage = freezed,
+    Object? atkScaleFactorList = freezed,
+    Object? defScaleFactorList = freezed,
+    Object? atkRank = freezed,
+    Object? defRank = freezed,
+    Object? hp = freezed,
   }) {
     return _then(_value.copyWith(
       showingDetail: showingDetail == freezed
           ? _value.showingDetail
-          : showingDetail as bool,
-      atk: atk == freezed ? _value.atk : atk as StatusParams,
-      def: def == freezed ? _value.def : def as StatusParams,
-      power: power == freezed ? _value.power : power as int,
-      maxDamage: maxDamage == freezed ? _value.maxDamage : maxDamage as int,
-      minDamage: minDamage == freezed ? _value.minDamage : minDamage as int,
+          : showingDetail // ignore: cast_nullable_to_non_nullable
+              as bool,
+      atk: atk == freezed
+          ? _value.atk
+          : atk // ignore: cast_nullable_to_non_nullable
+              as StatusParams,
+      def: def == freezed
+          ? _value.def
+          : def // ignore: cast_nullable_to_non_nullable
+              as StatusParams,
+      power: power == freezed
+          ? _value.power
+          : power // ignore: cast_nullable_to_non_nullable
+              as int,
+      maxDamage: maxDamage == freezed
+          ? _value.maxDamage
+          : maxDamage // ignore: cast_nullable_to_non_nullable
+              as int,
+      minDamage: minDamage == freezed
+          ? _value.minDamage
+          : minDamage // ignore: cast_nullable_to_non_nullable
+              as int,
       atkScaleFactorList: atkScaleFactorList == freezed
           ? _value.atkScaleFactorList
-          : atkScaleFactorList as List<DamageScaleFactor>,
+          : atkScaleFactorList // ignore: cast_nullable_to_non_nullable
+              as List<DamageScaleFactor>,
       defScaleFactorList: defScaleFactorList == freezed
           ? _value.defScaleFactorList
-          : defScaleFactorList as List<DamageScaleFactor>,
-      atkRank:
-          atkRank == freezed ? _value.atkRank : atkRank as DamageScaleFactor,
-      defRank:
-          defRank == freezed ? _value.defRank : defRank as DamageScaleFactor,
-      hp: hp == freezed ? _value.hp : hp as StatusParams,
+          : defScaleFactorList // ignore: cast_nullable_to_non_nullable
+              as List<DamageScaleFactor>,
+      atkRank: atkRank == freezed
+          ? _value.atkRank
+          : atkRank // ignore: cast_nullable_to_non_nullable
+              as DamageScaleFactor,
+      defRank: defRank == freezed
+          ? _value.defRank
+          : defRank // ignore: cast_nullable_to_non_nullable
+              as DamageScaleFactor,
+      hp: hp == freezed
+          ? _value.hp
+          : hp // ignore: cast_nullable_to_non_nullable
+              as StatusParams,
     ));
   }
 
   @override
   $StatusParamsCopyWith<$Res> get atk {
-    if (_value.atk == null) {
-      return null;
-    }
     return $StatusParamsCopyWith<$Res>(_value.atk, (value) {
       return _then(_value.copyWith(atk: value));
     });
@@ -156,9 +182,6 @@ class _$CalculatorStateCopyWithImpl<$Res>
 
   @override
   $StatusParamsCopyWith<$Res> get def {
-    if (_value.def == null) {
-      return null;
-    }
     return $StatusParamsCopyWith<$Res>(_value.def, (value) {
       return _then(_value.copyWith(def: value));
     });
@@ -166,9 +189,6 @@ class _$CalculatorStateCopyWithImpl<$Res>
 
   @override
   $DamageScaleFactorCopyWith<$Res> get atkRank {
-    if (_value.atkRank == null) {
-      return null;
-    }
     return $DamageScaleFactorCopyWith<$Res>(_value.atkRank, (value) {
       return _then(_value.copyWith(atkRank: value));
     });
@@ -176,9 +196,6 @@ class _$CalculatorStateCopyWithImpl<$Res>
 
   @override
   $DamageScaleFactorCopyWith<$Res> get defRank {
-    if (_value.defRank == null) {
-      return null;
-    }
     return $DamageScaleFactorCopyWith<$Res>(_value.defRank, (value) {
       return _then(_value.copyWith(defRank: value));
     });
@@ -186,9 +203,6 @@ class _$CalculatorStateCopyWithImpl<$Res>
 
   @override
   $StatusParamsCopyWith<$Res> get hp {
-    if (_value.hp == null) {
-      return null;
-    }
     return $StatusParamsCopyWith<$Res>(_value.hp, (value) {
       return _then(_value.copyWith(hp: value));
     });
@@ -240,38 +254,63 @@ class __$CalculatorStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object showingDetail = freezed,
-    Object atk = freezed,
-    Object def = freezed,
-    Object power = freezed,
-    Object maxDamage = freezed,
-    Object minDamage = freezed,
-    Object atkScaleFactorList = freezed,
-    Object defScaleFactorList = freezed,
-    Object atkRank = freezed,
-    Object defRank = freezed,
-    Object hp = freezed,
+    Object? showingDetail = freezed,
+    Object? atk = freezed,
+    Object? def = freezed,
+    Object? power = freezed,
+    Object? maxDamage = freezed,
+    Object? minDamage = freezed,
+    Object? atkScaleFactorList = freezed,
+    Object? defScaleFactorList = freezed,
+    Object? atkRank = freezed,
+    Object? defRank = freezed,
+    Object? hp = freezed,
   }) {
     return _then(_CalculatorState(
       showingDetail: showingDetail == freezed
           ? _value.showingDetail
-          : showingDetail as bool,
-      atk: atk == freezed ? _value.atk : atk as StatusParams,
-      def: def == freezed ? _value.def : def as StatusParams,
-      power: power == freezed ? _value.power : power as int,
-      maxDamage: maxDamage == freezed ? _value.maxDamage : maxDamage as int,
-      minDamage: minDamage == freezed ? _value.minDamage : minDamage as int,
+          : showingDetail // ignore: cast_nullable_to_non_nullable
+              as bool,
+      atk: atk == freezed
+          ? _value.atk
+          : atk // ignore: cast_nullable_to_non_nullable
+              as StatusParams,
+      def: def == freezed
+          ? _value.def
+          : def // ignore: cast_nullable_to_non_nullable
+              as StatusParams,
+      power: power == freezed
+          ? _value.power
+          : power // ignore: cast_nullable_to_non_nullable
+              as int,
+      maxDamage: maxDamage == freezed
+          ? _value.maxDamage
+          : maxDamage // ignore: cast_nullable_to_non_nullable
+              as int,
+      minDamage: minDamage == freezed
+          ? _value.minDamage
+          : minDamage // ignore: cast_nullable_to_non_nullable
+              as int,
       atkScaleFactorList: atkScaleFactorList == freezed
           ? _value.atkScaleFactorList
-          : atkScaleFactorList as List<DamageScaleFactor>,
+          : atkScaleFactorList // ignore: cast_nullable_to_non_nullable
+              as List<DamageScaleFactor>,
       defScaleFactorList: defScaleFactorList == freezed
           ? _value.defScaleFactorList
-          : defScaleFactorList as List<DamageScaleFactor>,
-      atkRank:
-          atkRank == freezed ? _value.atkRank : atkRank as DamageScaleFactor,
-      defRank:
-          defRank == freezed ? _value.defRank : defRank as DamageScaleFactor,
-      hp: hp == freezed ? _value.hp : hp as StatusParams,
+          : defScaleFactorList // ignore: cast_nullable_to_non_nullable
+              as List<DamageScaleFactor>,
+      atkRank: atkRank == freezed
+          ? _value.atkRank
+          : atkRank // ignore: cast_nullable_to_non_nullable
+              as DamageScaleFactor,
+      defRank: defRank == freezed
+          ? _value.defRank
+          : defRank // ignore: cast_nullable_to_non_nullable
+              as DamageScaleFactor,
+      hp: hp == freezed
+          ? _value.hp
+          : hp // ignore: cast_nullable_to_non_nullable
+              as StatusParams,
     ));
   }
 }
@@ -282,23 +321,17 @@ class __$CalculatorStateCopyWithImpl<$Res>
 class _$_CalculatorState extends _CalculatorState with DiagnosticableTreeMixin {
   const _$_CalculatorState(
       {this.showingDetail = true,
-      this.atk,
-      this.def,
+      required this.atk,
+      required this.def,
       this.power = 100,
       this.maxDamage = 0,
       this.minDamage = 0,
       this.atkScaleFactorList = const [],
       this.defScaleFactorList = const [],
-      this.atkRank,
-      this.defRank,
-      this.hp})
-      : assert(showingDetail != null),
-        assert(power != null),
-        assert(maxDamage != null),
-        assert(minDamage != null),
-        assert(atkScaleFactorList != null),
-        assert(defScaleFactorList != null),
-        super._();
+      required this.atkRank,
+      required this.defRank,
+      required this.hp})
+      : super._();
 
   factory _$_CalculatorState.fromJson(Map<String, dynamic> json) =>
       _$_$_CalculatorStateFromJson(json);
@@ -417,48 +450,51 @@ class _$_CalculatorState extends _CalculatorState with DiagnosticableTreeMixin {
 }
 
 abstract class _CalculatorState extends CalculatorState {
-  const _CalculatorState._() : super._();
   const factory _CalculatorState(
       {bool showingDetail,
-      StatusParams atk,
-      StatusParams def,
+      required StatusParams atk,
+      required StatusParams def,
       int power,
       int maxDamage,
       int minDamage,
       List<DamageScaleFactor> atkScaleFactorList,
       List<DamageScaleFactor> defScaleFactorList,
-      DamageScaleFactor atkRank,
-      DamageScaleFactor defRank,
-      StatusParams hp}) = _$_CalculatorState;
+      required DamageScaleFactor atkRank,
+      required DamageScaleFactor defRank,
+      required StatusParams hp}) = _$_CalculatorState;
+  const _CalculatorState._() : super._();
 
   factory _CalculatorState.fromJson(Map<String, dynamic> json) =
       _$_CalculatorState.fromJson;
 
   @override
-  bool get showingDetail;
+  bool get showingDetail => throw _privateConstructorUsedError;
   @override
-  StatusParams get atk;
+  StatusParams get atk => throw _privateConstructorUsedError;
   @override
-  StatusParams get def;
+  StatusParams get def => throw _privateConstructorUsedError;
   @override
-  int get power;
+  int get power => throw _privateConstructorUsedError;
   @override
-  int get maxDamage;
+  int get maxDamage => throw _privateConstructorUsedError;
   @override
-  int get minDamage;
+  int get minDamage => throw _privateConstructorUsedError;
   @override
-  List<DamageScaleFactor> get atkScaleFactorList;
+  List<DamageScaleFactor> get atkScaleFactorList =>
+      throw _privateConstructorUsedError;
   @override
-  List<DamageScaleFactor> get defScaleFactorList;
+  List<DamageScaleFactor> get defScaleFactorList =>
+      throw _privateConstructorUsedError;
   @override
-  DamageScaleFactor get atkRank;
+  DamageScaleFactor get atkRank => throw _privateConstructorUsedError;
   @override
-  DamageScaleFactor get defRank;
+  DamageScaleFactor get defRank => throw _privateConstructorUsedError;
   @override
-  StatusParams get hp;
+  StatusParams get hp => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$CalculatorStateCopyWith<_CalculatorState> get copyWith;
+  _$CalculatorStateCopyWith<_CalculatorState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 StatusParams _$StatusParamsFromJson(Map<String, dynamic> json) {
@@ -469,7 +505,6 @@ StatusParams _$StatusParamsFromJson(Map<String, dynamic> json) {
 class _$StatusParamsTearOff {
   const _$StatusParamsTearOff();
 
-// ignore: unused_element
   _StatusParams call(
       {String name = '',
       int base = 100,
@@ -485,27 +520,26 @@ class _$StatusParamsTearOff {
     );
   }
 
-// ignore: unused_element
   StatusParams fromJson(Map<String, Object> json) {
     return StatusParams.fromJson(json);
   }
 }
 
 /// @nodoc
-// ignore: unused_element
 const $StatusParams = _$StatusParamsTearOff();
 
 /// @nodoc
 mixin _$StatusParams {
-  String get name;
-  int get base;
-  int get individual;
-  int get effort;
-  double get nature;
+  String get name => throw _privateConstructorUsedError;
+  int get base => throw _privateConstructorUsedError;
+  int get individual => throw _privateConstructorUsedError;
+  int get effort => throw _privateConstructorUsedError;
+  double get nature => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $StatusParamsCopyWith<StatusParams> get copyWith;
+  $StatusParamsCopyWith<StatusParams> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -526,18 +560,33 @@ class _$StatusParamsCopyWithImpl<$Res> implements $StatusParamsCopyWith<$Res> {
 
   @override
   $Res call({
-    Object name = freezed,
-    Object base = freezed,
-    Object individual = freezed,
-    Object effort = freezed,
-    Object nature = freezed,
+    Object? name = freezed,
+    Object? base = freezed,
+    Object? individual = freezed,
+    Object? effort = freezed,
+    Object? nature = freezed,
   }) {
     return _then(_value.copyWith(
-      name: name == freezed ? _value.name : name as String,
-      base: base == freezed ? _value.base : base as int,
-      individual: individual == freezed ? _value.individual : individual as int,
-      effort: effort == freezed ? _value.effort : effort as int,
-      nature: nature == freezed ? _value.nature : nature as double,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      base: base == freezed
+          ? _value.base
+          : base // ignore: cast_nullable_to_non_nullable
+              as int,
+      individual: individual == freezed
+          ? _value.individual
+          : individual // ignore: cast_nullable_to_non_nullable
+              as int,
+      effort: effort == freezed
+          ? _value.effort
+          : effort // ignore: cast_nullable_to_non_nullable
+              as int,
+      nature: nature == freezed
+          ? _value.nature
+          : nature // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -564,18 +613,33 @@ class __$StatusParamsCopyWithImpl<$Res> extends _$StatusParamsCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object name = freezed,
-    Object base = freezed,
-    Object individual = freezed,
-    Object effort = freezed,
-    Object nature = freezed,
+    Object? name = freezed,
+    Object? base = freezed,
+    Object? individual = freezed,
+    Object? effort = freezed,
+    Object? nature = freezed,
   }) {
     return _then(_StatusParams(
-      name: name == freezed ? _value.name : name as String,
-      base: base == freezed ? _value.base : base as int,
-      individual: individual == freezed ? _value.individual : individual as int,
-      effort: effort == freezed ? _value.effort : effort as int,
-      nature: nature == freezed ? _value.nature : nature as double,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      base: base == freezed
+          ? _value.base
+          : base // ignore: cast_nullable_to_non_nullable
+              as int,
+      individual: individual == freezed
+          ? _value.individual
+          : individual // ignore: cast_nullable_to_non_nullable
+              as int,
+      effort: effort == freezed
+          ? _value.effort
+          : effort // ignore: cast_nullable_to_non_nullable
+              as int,
+      nature: nature == freezed
+          ? _value.nature
+          : nature // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -590,12 +654,7 @@ class _$_StatusParams extends _StatusParams with DiagnosticableTreeMixin {
       this.individual = 31,
       this.effort = 0,
       this.nature = 1.0})
-      : assert(name != null),
-        assert(base != null),
-        assert(individual != null),
-        assert(effort != null),
-        assert(nature != null),
-        super._();
+      : super._();
 
   factory _$_StatusParams.fromJson(Map<String, dynamic> json) =>
       _$_$_StatusParamsFromJson(json);
@@ -671,30 +730,31 @@ class _$_StatusParams extends _StatusParams with DiagnosticableTreeMixin {
 }
 
 abstract class _StatusParams extends StatusParams {
-  const _StatusParams._() : super._();
   const factory _StatusParams(
       {String name,
       int base,
       int individual,
       int effort,
       double nature}) = _$_StatusParams;
+  const _StatusParams._() : super._();
 
   factory _StatusParams.fromJson(Map<String, dynamic> json) =
       _$_StatusParams.fromJson;
 
   @override
-  String get name;
+  String get name => throw _privateConstructorUsedError;
   @override
-  int get base;
+  int get base => throw _privateConstructorUsedError;
   @override
-  int get individual;
+  int get individual => throw _privateConstructorUsedError;
   @override
-  int get effort;
+  int get effort => throw _privateConstructorUsedError;
   @override
-  double get nature;
+  double get nature => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$StatusParamsCopyWith<_StatusParams> get copyWith;
+  _$StatusParamsCopyWith<_StatusParams> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 DamageScaleFactor _$DamageScaleFactorFromJson(Map<String, dynamic> json) {
@@ -705,7 +765,6 @@ DamageScaleFactor _$DamageScaleFactorFromJson(Map<String, dynamic> json) {
 class _$DamageScaleFactorTearOff {
   const _$DamageScaleFactorTearOff();
 
-// ignore: unused_element
   _DamageScaleFactor call(String label, double scaleFactor,
       {bool isEnabled = false}) {
     return _DamageScaleFactor(
@@ -715,25 +774,24 @@ class _$DamageScaleFactorTearOff {
     );
   }
 
-// ignore: unused_element
   DamageScaleFactor fromJson(Map<String, Object> json) {
     return DamageScaleFactor.fromJson(json);
   }
 }
 
 /// @nodoc
-// ignore: unused_element
 const $DamageScaleFactor = _$DamageScaleFactorTearOff();
 
 /// @nodoc
 mixin _$DamageScaleFactor {
-  String get label;
-  double get scaleFactor;
-  bool get isEnabled;
+  String get label => throw _privateConstructorUsedError;
+  double get scaleFactor => throw _privateConstructorUsedError;
+  bool get isEnabled => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $DamageScaleFactorCopyWith<DamageScaleFactor> get copyWith;
+  $DamageScaleFactorCopyWith<DamageScaleFactor> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -755,15 +813,23 @@ class _$DamageScaleFactorCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object label = freezed,
-    Object scaleFactor = freezed,
-    Object isEnabled = freezed,
+    Object? label = freezed,
+    Object? scaleFactor = freezed,
+    Object? isEnabled = freezed,
   }) {
     return _then(_value.copyWith(
-      label: label == freezed ? _value.label : label as String,
-      scaleFactor:
-          scaleFactor == freezed ? _value.scaleFactor : scaleFactor as double,
-      isEnabled: isEnabled == freezed ? _value.isEnabled : isEnabled as bool,
+      label: label == freezed
+          ? _value.label
+          : label // ignore: cast_nullable_to_non_nullable
+              as String,
+      scaleFactor: scaleFactor == freezed
+          ? _value.scaleFactor
+          : scaleFactor // ignore: cast_nullable_to_non_nullable
+              as double,
+      isEnabled: isEnabled == freezed
+          ? _value.isEnabled
+          : isEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -791,14 +857,23 @@ class __$DamageScaleFactorCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object label = freezed,
-    Object scaleFactor = freezed,
-    Object isEnabled = freezed,
+    Object? label = freezed,
+    Object? scaleFactor = freezed,
+    Object? isEnabled = freezed,
   }) {
     return _then(_DamageScaleFactor(
-      label == freezed ? _value.label : label as String,
-      scaleFactor == freezed ? _value.scaleFactor : scaleFactor as double,
-      isEnabled: isEnabled == freezed ? _value.isEnabled : isEnabled as bool,
+      label == freezed
+          ? _value.label
+          : label // ignore: cast_nullable_to_non_nullable
+              as String,
+      scaleFactor == freezed
+          ? _value.scaleFactor
+          : scaleFactor // ignore: cast_nullable_to_non_nullable
+              as double,
+      isEnabled: isEnabled == freezed
+          ? _value.isEnabled
+          : isEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -810,10 +885,7 @@ class _$_DamageScaleFactor
     with DiagnosticableTreeMixin
     implements _DamageScaleFactor {
   const _$_DamageScaleFactor(this.label, this.scaleFactor,
-      {this.isEnabled = false})
-      : assert(label != null),
-        assert(scaleFactor != null),
-        assert(isEnabled != null);
+      {this.isEnabled = false});
 
   factory _$_DamageScaleFactor.fromJson(Map<String, dynamic> json) =>
       _$_$_DamageScaleFactorFromJson(json);
@@ -881,12 +953,13 @@ abstract class _DamageScaleFactor implements DamageScaleFactor {
       _$_DamageScaleFactor.fromJson;
 
   @override
-  String get label;
+  String get label => throw _privateConstructorUsedError;
   @override
-  double get scaleFactor;
+  double get scaleFactor => throw _privateConstructorUsedError;
   @override
-  bool get isEnabled;
+  bool get isEnabled => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$DamageScaleFactorCopyWith<_DamageScaleFactor> get copyWith;
+  _$DamageScaleFactorCopyWith<_DamageScaleFactor> get copyWith =>
+      throw _privateConstructorUsedError;
 }

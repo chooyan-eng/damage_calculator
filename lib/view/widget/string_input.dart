@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 class StringInput extends StatefulWidget {
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final ValueChanged<String> onChanged;
   final String value;
 
   const StringInput({
-    Key key,
+    Key? key,
     this.controller,
-    this.onChanged,
-    this.value,
+    required this.onChanged,
+    required this.value,
   }) : super(key: key);
 
   @override
@@ -17,7 +17,7 @@ class StringInput extends StatefulWidget {
 }
 
 class _StringInputState extends State<StringInput> {
-  TextEditingController _controller;
+  late TextEditingController _controller;
 
   @override
   void initState() {

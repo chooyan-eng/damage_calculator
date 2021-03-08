@@ -16,16 +16,16 @@ abstract class CalculatorState with _$CalculatorState {
 
   const factory CalculatorState({
     @Default(true) bool showingDetail,
-    StatusParams atk,
-    StatusParams def,
+    required StatusParams atk,
+    required StatusParams def,
     @Default(100) int power,
     @Default(0) int maxDamage,
     @Default(0) int minDamage,
     @Default([]) List<DamageScaleFactor> atkScaleFactorList,
     @Default([]) List<DamageScaleFactor> defScaleFactorList,
-    DamageScaleFactor atkRank,
-    DamageScaleFactor defRank,
-    StatusParams hp,
+    required DamageScaleFactor atkRank,
+    required DamageScaleFactor defRank,
+    required StatusParams hp,
   }) = _CalculatorState;
 
   double get totalAtkScaleFactor => atkScaleFactorList
@@ -117,7 +117,16 @@ class CalculatorController extends StateNotifier<CalculatorState> {
   final atkActualController = TextEditingController();
   final defActualController = TextEditingController();
 
-  CalculatorController() : super(const CalculatorState());
+  CalculatorController()
+      : super(
+          const CalculatorState(
+            atk: StatusParams(),
+            def: StatusParams(),
+            atkRank: DamageScaleFactor('', 0),
+            defRank: DamageScaleFactor('', 0),
+            hp: StatusParams(),
+          ),
+        );
 
   void init() {
     state = state.copyWith(
@@ -162,18 +171,18 @@ class CalculatorController extends StateNotifier<CalculatorState> {
   }
 
   void updateStatus({
-    String atkName,
-    int atkBase,
-    int atkIndividual,
-    int atkEffort,
-    double atkNature,
-    int atkActual,
-    String defName,
-    int defBase,
-    int defIndividual,
-    int defEffort,
-    double defNature,
-    int defActual,
+    String? atkName,
+    int? atkBase,
+    int? atkIndividual,
+    int? atkEffort,
+    double? atkNature,
+    int? atkActual,
+    String? defName,
+    int? defBase,
+    int? defIndividual,
+    int? defEffort,
+    double? defNature,
+    int? defActual,
   }) {
     state = state.copyWith(
       atk: state.atk.copyWith(
@@ -204,11 +213,15 @@ class CalculatorController extends StateNotifier<CalculatorState> {
   }
 
   void updateDamageScaleFactor({
-    DamageScaleFactor atkScaleFactor,
-    DamageScaleFactor defScaleFactor,
+    DamageScaleFactor? atkScaleFactor,
+    DamageScaleFactor? defScaleFactor,
   }) {
-    final atkIndex = state.atkScaleFactorList.indexOf(atkScaleFactor);
-    final defIndex = state.defScaleFactorList.indexOf(defScaleFactor);
+    final atkIndex = atkScaleFactor == null
+        ? -1
+        : state.atkScaleFactorList.indexOf(atkScaleFactor);
+    final defIndex = defScaleFactor == null
+        ? -1
+        : state.defScaleFactorList.indexOf(defScaleFactor);
 
     if (atkIndex > -1) {
       state.atkScaleFactorList[atkIndex] =
@@ -230,8 +243,8 @@ class CalculatorController extends StateNotifier<CalculatorState> {
   }
 
   void updateRank({
-    DamageScaleFactor atkRank,
-    DamageScaleFactor defRank,
+    DamageScaleFactor? atkRank,
+    DamageScaleFactor? defRank,
   }) {
     state = state.copyWith(
       atkRank: atkRank ?? state.atkRank,
@@ -240,7 +253,7 @@ class CalculatorController extends StateNotifier<CalculatorState> {
     updateDamage();
   }
 
-  void updateDamage({int power}) {
+  void updateDamage({int? power}) {
     final damages = Calculator.toDamage(
       (state.atk.actualStatus * state.atkRank.scaleFactor).toInt(),
       (state.def.actualStatus *
@@ -258,9 +271,9 @@ class CalculatorController extends StateNotifier<CalculatorState> {
   }
 
   void updateHp({
-    int hpBase,
-    int hpIndividual,
-    int hpEffort,
+    int? hpBase,
+    int? hpIndividual,
+    int? hpEffort,
   }) {
     state = state.copyWith(
       hp: state.hp.copyWith(

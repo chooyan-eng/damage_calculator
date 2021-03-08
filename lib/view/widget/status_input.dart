@@ -7,10 +7,10 @@ class StatusInput extends StatefulWidget {
   final ValueChanged<int> onChanged;
 
   StatusInput({
-    Key key,
-    this.selections,
-    this.value,
-    this.onChanged,
+    Key? key,
+    this.selections = const [],
+    required this.value,
+    required this.onChanged,
   }) : super(key: key);
 
   @override
@@ -18,7 +18,7 @@ class StatusInput extends StatefulWidget {
 }
 
 class _StatusInputState extends State<StatusInput> {
-  TextEditingController _controller;
+  late TextEditingController _controller;
 
   @override
   void initState() {
@@ -34,7 +34,7 @@ class _StatusInputState extends State<StatusInput> {
           controller: _controller,
           onChanged: (value) => widget.onChanged(value),
         ),
-        if (widget.selections?.isNotEmpty ?? false) ...[
+        if (widget.selections.isNotEmpty) ...[
           const SizedBox(height: 4),
           Row(
             mainAxisSize: MainAxisSize.min,
