@@ -21,8 +21,8 @@ class _ValueInputState extends State<ValueInput> {
 
   @override
   void initState() {
-    _controller = widget.controller ?? TextEditingController()
-      ..text = widget.value;
+    _controller =
+        widget.controller ?? (TextEditingController()..text = widget.value);
     super.initState();
   }
 
